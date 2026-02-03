@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
-import { Heart } from "lucide-react";
+import { Heart, ArrowUp } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-8 border-t border-border/50">
+    <footer className="py-12 border-t border-border/30 relative z-10">
       <div className="container-custom">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo */}
           <motion.a
             href="#"
@@ -16,25 +16,26 @@ const Footer = () => {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
-            whileHover={{ scale: 1.02 }}
+            whileHover={{ scale: 1.05 }}
           >
             <span className="gradient-text">VJ</span>
           </motion.a>
 
           {/* Copyright */}
-          <p className="text-sm text-muted-foreground flex items-center gap-1">
+          <p className="text-sm text-muted-foreground flex items-center gap-2">
             © {currentYear} Varshith Julakanti. Built with
-            <Heart size={14} className="text-primary" fill="currentColor" />
+            <Heart size={14} className="text-primary" fill="hsl(var(--primary))" />
             and lots of coffee.
           </p>
 
           {/* Back to top */}
           <motion.button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="text-sm text-muted-foreground hover:text-primary transition-colors"
+            className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 group"
             whileHover={{ y: -2 }}
           >
-            Back to top ↑
+            Back to top
+            <ArrowUp size={14} className="group-hover:-translate-y-1 transition-transform" />
           </motion.button>
         </div>
       </div>

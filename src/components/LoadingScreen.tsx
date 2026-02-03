@@ -1,38 +1,77 @@
 import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 
 interface LoadingScreenProps {
   onComplete: () => void;
 }
 
 const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        onComplete: () => {
+          gsap.to(containerRef.current, {
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.inOut",
+            onComplete: onComplete,
+          });
+        },
+      });
+
+      // Animate progress bar
+      tl.to(progressRef.current, {
+        width: "100%",
+        duration: 1.5,
+        ease: "power2.inOut",
+      });
+
+      // Fade in text
+      tl.fromTo(
+        textRef.current,
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+        0.3
+      );
+
+      // Hold for a moment
+      tl.to({}, { duration: 0.5 });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, [onComplete]);
+
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-background"
+      ref={containerRef}
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-background"
       initial={{ opacity: 1 }}
-      animate={{ opacity: 0 }}
-      transition={{ duration: 0.8, delay: 2 }}
-      onAnimationComplete={onComplete}
     >
+      {/* Subtle gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-background/95" />
+      
       <div className="relative flex flex-col items-center">
-        {/* Animated rings */}
-        <div className="relative w-24 h-24">
+        {/* Minimal loading indicator */}
+        <div className="relative mb-12">
+          {/* Outer ring */}
           <motion.div
-            className="absolute inset-0 rounded-full border-2 border-primary/30"
+            className="w-20 h-20 rounded-full border border-border/30"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           />
+          
+          {/* Inner spinning ring */}
           <motion.div
-            className="absolute inset-2 rounded-full border-2 border-primary/50"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          />
-          <motion.div
-            className="absolute inset-4 rounded-full border-2 border-primary"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            className="absolute inset-2 rounded-full border-t border-primary"
+            initial={{ rotate: 0 }}
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
           />
           
           {/* Center dot */}
@@ -40,49 +79,27 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
             className="absolute inset-0 flex items-center justify-center"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            transition={{ duration: 0.4, delay: 0.3, type: "spring" }}
+            transition={{ duration: 0.4, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="w-4 h-4 rounded-full bg-primary glow" />
+            <div className="w-2 h-2 rounded-full bg-primary" />
           </motion.div>
-
-          {/* Spinning ring */}
-          <motion.div
-            className="absolute inset-0 rounded-full border-t-2 border-primary animate-spin-slow"
-            style={{ animationDuration: '2s' }}
-          />
         </div>
 
-        {/* Name reveal */}
-        <motion.div
-          className="mt-8 overflow-hidden"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
+        {/* Name */}
+        <p
+          ref={textRef}
+          className="text-sm font-display tracking-[0.4em] text-muted-foreground uppercase opacity-0"
         >
-          <motion.p
-            className="text-lg font-display tracking-widest text-muted-foreground"
-            initial={{ y: 20 }}
-            animate={{ y: 0 }}
-            transition={{ delay: 0.6, duration: 0.5 }}
-          >
-            VARSHITH JULAKANTI
-          </motion.p>
-        </motion.div>
+          Varshith Julakanti
+        </p>
 
-        {/* Loading bar */}
-        <motion.div
-          className="mt-6 w-48 h-[2px] bg-muted overflow-hidden rounded-full"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-        >
-          <motion.div
-            className="h-full bg-primary"
-            initial={{ width: "0%" }}
-            animate={{ width: "100%" }}
-            transition={{ duration: 1.2, delay: 0.8, ease: "easeInOut" }}
+        {/* Progress bar */}
+        <div className="mt-8 w-48 h-[1px] bg-border/30 overflow-hidden">
+          <div
+            ref={progressRef}
+            className="h-full bg-primary w-0"
           />
-        </motion.div>
+        </div>
       </div>
     </motion.div>
   );
