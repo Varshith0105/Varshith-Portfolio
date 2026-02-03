@@ -85,7 +85,7 @@ const Contact = () => {
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">Email</p>
                   <p className="font-medium group-hover:text-primary transition-colors duration-300">
-                    hello@varshith.dev
+                    varshithjulakanti@gmail.com
                   </p>
                 </div>
                 <ArrowUpRight size={18} className="ml-auto text-muted-foreground group-hover:text-primary transition-all duration-300 transform group-hover:translate-x-1 group-hover:-translate-y-1" />
