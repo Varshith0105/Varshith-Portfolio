@@ -4,10 +4,10 @@ import { Send, Mail, MapPin, Linkedin, Github, Twitter, ArrowUpRight } from "luc
 import MagneticButton from "./MagneticButton";
 
 const socialLinks = [
-  { icon: Github, label: "GitHub", href: "#" },
-  { icon: Linkedin, label: "LinkedIn", href: "#" },
-  { icon: Twitter, label: "Twitter", href: "#" },
-  { icon: Mail, label: "Email", href: "mailto:hello@varshith.dev" },
+  { icon: Github, label: "GitHub", href: "https://github.com/Varshith0105" },
+  { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/_.varshith_.7/?hl=en" },
+  { icon: LinkedIn, label: "LinkedIn", href: "https://www.linkedin.com/in/varshith-j-6b2446300/" },
+  { icon: Mail, label: "Email", href: "varshithjulakanti@gmail.com" },
 ];
 
 const Contact = () => {
