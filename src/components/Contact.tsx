@@ -75,7 +75,7 @@ const Contact = () => {
             {/* Contact details */}
             <div className="space-y-5">
               <motion.a
-                href="mailto:hello@varshith.dev"
+                href="mailto:varshithjulakanti@gmail.com"
                 className="flex items-center gap-5 p-6 glass-card rounded-2xl group hover:border-primary/40 transition-all duration-500"
                 whileHover={{ x: 6 }}
               >
@@ -100,7 +100,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">Location</p>
-                  <p className="font-medium">Amaravati, Andhra Pradesh, India</p>
+                  <p className="font-medium">Hyderabad,Telangana,India</p>
                 </div>
               </motion.div>
             </div>
