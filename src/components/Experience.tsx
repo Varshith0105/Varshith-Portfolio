@@ -1,6 +1,10 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { Calendar, MapPin, ArrowRight } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const experiences = [
   {
@@ -42,30 +46,50 @@ const experiences = [
 ];
 
 const Experience = () => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const ctx = gsap.context(() => {
+      // Animate timeline items
+      gsap.fromTo(
+        ".timeline-item",
+        { x: -50, opacity: 0 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ref.current,
+            start: "top 70%",
+          },
+        }
+      );
+    }, ref);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section id="experience" className="section-padding relative overflow-hidden" ref={ref}>
       {/* Background */}
-      <div className="absolute inset-0 hero-gradient opacity-30" />
+      <div className="absolute inset-0 hero-gradient opacity-20" />
 
       <div className="container-custom relative z-10">
         {/* Header */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-20"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          <motion.p
-            className="text-primary font-medium mb-4 tracking-widest text-sm"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.2 }}
-          >
-            MY JOURNEY
-          </motion.p>
+          <p className="text-primary font-medium mb-4 tracking-[0.3em] text-xs uppercase">
+            My Journey
+          </p>
           <h2 className="text-headline">
             Experience & <span className="gradient-text">Education</span>
           </h2>
@@ -75,55 +99,52 @@ const Experience = () => {
         <div className="relative max-w-4xl mx-auto">
           {/* Timeline line */}
           <motion.div
-            className="absolute left-0 md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary via-primary/50 to-transparent md:-translate-x-1/2"
+            className="absolute left-0 md:left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-primary/50 via-primary/20 to-transparent md:-translate-x-1/2"
             initial={{ scaleY: 0 }}
             animate={isInView ? { scaleY: 1 } : {}}
-            transition={{ duration: 1, delay: 0.3 }}
+            transition={{ duration: 1.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             style={{ transformOrigin: "top" }}
           />
 
           {/* Experience items */}
-          <div className="space-y-12">
+          <div className="space-y-16">
             {experiences.map((exp, index) => (
-              <motion.div
+              <div
                 key={exp.period}
-                className={`relative flex flex-col md:flex-row gap-8 ${
+                className={`timeline-item relative flex flex-col md:flex-row gap-10 ${
                   index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                 }`}
-                initial={{ opacity: 0, y: 40 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.4 + index * 0.2, duration: 0.6 }}
               >
                 {/* Timeline dot */}
                 <motion.div
-                  className="absolute left-0 md:left-1/2 w-4 h-4 rounded-full bg-primary border-4 border-background md:-translate-x-1/2 z-10"
+                  className="absolute left-0 md:left-1/2 w-3 h-3 rounded-full bg-primary border-4 border-background md:-translate-x-1/2 z-10"
                   initial={{ scale: 0 }}
                   animate={isInView ? { scale: 1 } : {}}
                   transition={{ delay: 0.5 + index * 0.2, type: "spring" }}
                 />
 
                 {/* Content */}
-                <div className={`md:w-1/2 pl-8 md:pl-0 ${index % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12"}`}>
+                <div className={`md:w-1/2 pl-10 md:pl-0 ${index % 2 === 0 ? "md:pr-16 md:text-right" : "md:pl-16"}`}>
                   <motion.div
-                    className="glass-card p-6 rounded-2xl"
-                    whileHover={{ scale: 1.02, borderColor: "hsl(var(--primary) / 0.5)" }}
-                    transition={{ duration: 0.3 }}
+                    className="glass-card p-8 rounded-2xl group"
+                    whileHover={{ scale: 1.02, borderColor: "hsl(var(--primary) / 0.4)" }}
+                    transition={{ duration: 0.4 }}
                   >
                     {/* Period badge */}
-                    <div className={`flex items-center gap-2 mb-4 ${index % 2 === 0 ? "md:justify-end" : ""}`}>
+                    <div className={`flex items-center gap-2 mb-6 ${index % 2 === 0 ? "md:justify-end" : ""}`}>
                       <Calendar size={14} className="text-primary" />
-                      <span className="text-sm text-primary font-medium">{exp.period}</span>
+                      <span className="text-sm text-primary font-medium tracking-wide">{exp.period}</span>
                     </div>
 
-                    <h3 className="font-display font-semibold text-xl mb-1">{exp.title}</h3>
-                    <p className="text-muted-foreground mb-2">{exp.company}</p>
+                    <h3 className="font-display font-semibold text-xl mb-2">{exp.title}</h3>
+                    <p className="text-muted-foreground mb-3">{exp.company}</p>
                     
-                    <div className={`flex items-center gap-2 mb-4 text-sm text-muted-foreground ${index % 2 === 0 ? "md:justify-end" : ""}`}>
+                    <div className={`flex items-center gap-2 mb-6 text-sm text-muted-foreground ${index % 2 === 0 ? "md:justify-end" : ""}`}>
                       <MapPin size={14} />
                       <span>{exp.location}</span>
                     </div>
 
-                    <p className="text-muted-foreground text-sm mb-4">{exp.description}</p>
+                    <p className="text-muted-foreground text-sm mb-6 leading-relaxed">{exp.description}</p>
 
                     {/* Highlights */}
                     <div className="space-y-2">
@@ -142,7 +163,7 @@ const Experience = () => {
 
                 {/* Empty space for timeline layout */}
                 <div className="hidden md:block md:w-1/2" />
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

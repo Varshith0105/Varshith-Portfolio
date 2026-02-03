@@ -1,9 +1,14 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { MapPin, Sparkles, Brain, Code } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const stats = [
@@ -12,71 +17,81 @@ const About = () => {
     { icon: Sparkles, label: "Models Trained", value: "50+" },
   ];
 
+  useEffect(() => {
+    if (!textRef.current) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        ".about-text-reveal",
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.15,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: textRef.current,
+            start: "top 80%",
+            end: "bottom 60%",
+          },
+        }
+      );
+    }, ref);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section id="about" className="section-padding relative overflow-hidden" ref={ref}>
       {/* Background gradient */}
-      <div className="absolute inset-0 hero-gradient opacity-50" />
+      <div className="absolute inset-0 hero-gradient opacity-40" />
       
       <div className="container-custom relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
           {/* Left side - Text content */}
           <motion.div
+            ref={textRef}
             initial={{ opacity: 0, x: -40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           >
-            <motion.p
-              className="text-primary font-medium mb-4 tracking-widest text-sm"
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : {}}
-              transition={{ delay: 0.2 }}
-            >
-              ABOUT ME
-            </motion.p>
+            <p className="about-text-reveal text-primary font-medium mb-4 tracking-[0.3em] text-xs uppercase">
+              About Me
+            </p>
             
-            <motion.h2
-              className="text-headline mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.3, duration: 0.6 }}
-            >
+            <h2 className="about-text-reveal text-headline mb-10">
               Crafting <span className="gradient-text">Intelligence</span> Through Code
-            </motion.h2>
+            </h2>
 
-            <motion.div
-              className="space-y-6 text-lg text-muted-foreground"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.4, duration: 0.6 }}
-            >
-              <p>
+            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
+              <p className="about-text-reveal">
                 I'm an <span className="text-foreground">AI Engineer</span> passionate about 
                 developing intelligent systems that solve real-world problems. My journey into 
                 machine learning began with a fascination for how algorithms can learn and 
                 evolve—much like the human mind.
               </p>
-              <p>
+              <p className="about-text-reveal">
                 From building <span className="text-foreground">computer vision models</span> that 
                 detect diseases to creating <span className="text-foreground">financial AI assistants</span>, 
-                I specialize in turning complex data into actionable insights. I believe in the 
-                power of AI to transform industries and improve lives.
+                I specialize in turning complex data into actionable insights.
               </p>
-              <p>
+              <p className="about-text-reveal">
                 When I'm not training neural networks, you'll find me exploring the latest 
                 research papers, contributing to open-source projects, or experimenting with 
                 cutting-edge MLOps practices.
               </p>
-            </motion.div>
+            </div>
 
             {/* Location */}
             <motion.div
-              className="flex items-center gap-2 mt-8 text-muted-foreground"
+              className="about-text-reveal flex items-center gap-3 mt-10 text-muted-foreground"
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
-              transition={{ delay: 0.6 }}
+              transition={{ delay: 0.8 }}
             >
-              <MapPin size={18} className="text-primary" />
-              <span>Amaravati, Andhra Pradesh, India</span>
+              <MapPin size={16} className="text-primary" />
+              <span className="text-sm tracking-wide">Amaravati, Andhra Pradesh, India</span>
             </motion.div>
           </motion.div>
 
@@ -85,29 +100,29 @@ const About = () => {
             className="relative"
             initial={{ opacity: 0, x: 40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
             {/* Decorative elements */}
-            <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-primary/10 blur-3xl" />
-            <div className="absolute -bottom-10 -left-10 w-60 h-60 rounded-full bg-primary/5 blur-3xl" />
+            <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-primary/5 blur-[100px]" />
+            <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-primary/3 blur-[100px]" />
 
             {/* Stats cards */}
             <div className="grid gap-6 relative">
               {stats.map((stat, index) => (
                 <motion.div
                   key={stat.label}
-                  className="glass-card p-6 rounded-2xl flex items-center gap-6"
-                  initial={{ opacity: 0, y: 20 }}
+                  className="glass-card p-8 rounded-2xl flex items-center gap-8 group"
+                  initial={{ opacity: 0, y: 30 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
-                  whileHover={{ scale: 1.02, borderColor: "hsl(var(--primary) / 0.5)" }}
+                  transition={{ delay: 0.4 + index * 0.15, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                  whileHover={{ scale: 1.02, borderColor: "hsl(var(--primary) / 0.4)" }}
                 >
-                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center">
-                    <stat.icon size={24} className="text-primary" />
+                  <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-500">
+                    <stat.icon size={26} className="text-primary" />
                   </div>
                   <div>
-                    <p className="text-3xl font-display font-bold text-foreground">{stat.value}</p>
-                    <p className="text-muted-foreground text-sm">{stat.label}</p>
+                    <p className="text-4xl font-display font-bold text-foreground">{stat.value}</p>
+                    <p className="text-muted-foreground text-sm mt-1">{stat.label}</p>
                   </div>
                 </motion.div>
               ))}
@@ -115,11 +130,11 @@ const About = () => {
 
             {/* Visual accent */}
             <motion.div
-              className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-primary/20 rounded-full"
+              className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-72 h-72 border border-primary/10 rounded-full"
               animate={{ rotate: 360 }}
-              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
             >
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-primary" />
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-primary" />
             </motion.div>
           </motion.div>
         </div>

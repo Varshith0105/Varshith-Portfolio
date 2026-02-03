@@ -9,31 +9,40 @@ import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <div className="relative noise-overlay">
-      <AnimatePresence mode="wait">
-        {isLoading && (
-          <LoadingScreen onComplete={() => setIsLoading(false)} />
-        )}
-      </AnimatePresence>
+    <SmoothScrollProvider>
+      <div className="relative">
+        {/* Animated grain overlay */}
+        <div className="grain-overlay" />
+        
+        {/* Vignette effect */}
+        <div className="vignette-overlay" />
 
-      <Navigation />
-      
-      <main>
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Experience />
-        <Contact />
-      </main>
+        <AnimatePresence mode="wait">
+          {isLoading && (
+            <LoadingScreen onComplete={() => setIsLoading(false)} />
+          )}
+        </AnimatePresence>
 
-      <Footer />
-    </div>
+        <Navigation />
+        
+        <main>
+          <Hero />
+          <About />
+          <Skills />
+          <Projects />
+          <Experience />
+          <Contact />
+        </main>
+
+        <Footer />
+      </div>
+    </SmoothScrollProvider>
   );
 };
 

@@ -1,31 +1,59 @@
 import { motion, useMotionValue, useTransform } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { ChevronDown } from "lucide-react";
+import gsap from "gsap";
+import MagneticButton from "./MagneticButton";
 
 const Hero = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const heroRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
   // Parallax transforms
-  const backgroundX = useTransform(mouseX, [-500, 500], [20, -20]);
-  const backgroundY = useTransform(mouseY, [-500, 500], [20, -20]);
-  const textX = useTransform(mouseX, [-500, 500], [10, -10]);
-  const textY = useTransform(mouseY, [-500, 500], [10, -10]);
+  const backgroundX = useTransform(mouseX, [-500, 500], [30, -30]);
+  const backgroundY = useTransform(mouseY, [-500, 500], [30, -30]);
+  const textX = useTransform(mouseX, [-500, 500], [15, -15]);
+  const textY = useTransform(mouseY, [-500, 500], [15, -15]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
       const centerX = window.innerWidth / 2;
       const centerY = window.innerHeight / 2;
-      mouseX.set(clientX - centerX);
-      mouseY.set(clientY - centerY);
-      setMousePosition({ x: clientX, y: clientY });
+      mouseX.set(e.clientX - centerX);
+      mouseY.set(e.clientY - centerY);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [mouseX, mouseY]);
+
+  // GSAP text reveal animation
+  useEffect(() => {
+    if (!titleRef.current) return;
+    
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        ".hero-line",
+        { 
+          y: 100, 
+          opacity: 0,
+          rotateX: -40,
+        },
+        { 
+          y: 0, 
+          opacity: 1, 
+          rotateX: 0,
+          duration: 1.2,
+          stagger: 0.15,
+          delay: 2.3,
+          ease: "power4.out",
+        }
+      );
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const scrollToAbout = () => {
     const element = document.getElementById("about");
@@ -35,51 +63,41 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Cursor glow effect */}
-      <motion.div
-        className="cursor-glow hidden lg:block"
-        animate={{
-          x: mousePosition.x,
-          y: mousePosition.y,
-        }}
-        transition={{ type: "spring", stiffness: 500, damping: 50 }}
-      />
-
+    <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0 hero-gradient" />
       
       {/* Animated grid */}
       <motion.div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.02]"
         style={{ x: backgroundX, y: backgroundY }}
       >
         <div className="absolute inset-0" style={{
           backgroundImage: `
-            linear-gradient(hsl(var(--primary) / 0.3) 1px, transparent 1px),
-            linear-gradient(90deg, hsl(var(--primary) / 0.3) 1px, transparent 1px)
+            linear-gradient(hsl(var(--primary) / 0.4) 1px, transparent 1px),
+            linear-gradient(90deg, hsl(var(--primary) / 0.4) 1px, transparent 1px)
           `,
-          backgroundSize: '100px 100px',
+          backgroundSize: '80px 80px',
         }} />
       </motion.div>
 
-      {/* Floating orbs */}
+      {/* Floating orbs with smoother animation */}
       <motion.div
-        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-primary/5 blur-3xl"
+        className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-primary/5 blur-[100px]"
         animate={{
           scale: [1, 1.2, 1],
-          opacity: [0.3, 0.5, 0.3],
+          opacity: [0.2, 0.4, 0.2],
         }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         style={{ x: backgroundX, y: backgroundY }}
       />
       <motion.div
-        className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-primary/10 blur-3xl"
+        className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-primary/8 blur-[100px]"
         animate={{
           scale: [1.2, 1, 1.2],
-          opacity: [0.5, 0.3, 0.5],
+          opacity: [0.4, 0.2, 0.4],
         }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         style={{ x: backgroundX, y: backgroundY }}
       />
 
@@ -88,59 +106,54 @@ const Hero = () => {
         <motion.div style={{ x: textX, y: textY }}>
           {/* Greeting */}
           <motion.p
-            className="text-primary font-medium mb-6 tracking-widest text-sm"
+            className="text-primary font-medium mb-8 tracking-[0.3em] text-xs uppercase"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 2.3 }}
+            transition={{ duration: 0.8, delay: 2.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            WELCOME TO MY PORTFOLIO
+            Welcome to my portfolio
           </motion.p>
 
-          {/* Name */}
-          <motion.h1
-            className="text-display mb-6"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 2.4 }}
-          >
-            <span className="block text-foreground">Hi, I'm</span>
-            <span className="block gradient-text mt-2">Varshith Julakanti</span>
-          </motion.h1>
+          {/* Name with GSAP reveal */}
+          <h1 ref={titleRef} className="text-display mb-8 perspective-1000">
+            <span className="hero-line block text-foreground/90 overflow-hidden">
+              Hi, I'm
+            </span>
+            <span className="hero-line block gradient-text mt-2 overflow-hidden">
+              Varshith Julakanti
+            </span>
+          </h1>
 
           {/* Tagline */}
           <motion.p
-            className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-12"
+            className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-14 leading-relaxed"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 2.6 }}
+            transition={{ duration: 1, delay: 2.8, ease: [0.22, 1, 0.36, 1] }}
           >
-            I build <span className="text-foreground">intelligent AI-driven solutions</span> that 
+            I build <span className="text-foreground font-medium">intelligent AI-driven solutions</span> that 
             push the boundaries of what's possible with Machine Learning & Deep Learning.
           </motion.p>
 
           {/* CTA Buttons */}
           <motion.div
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="flex flex-col sm:flex-row items-center justify-center gap-5"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 2.8 }}
+            transition={{ duration: 0.8, delay: 3, ease: [0.22, 1, 0.36, 1] }}
           >
-            <motion.button
+            <MagneticButton
               onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
-              className="px-8 py-4 rounded-full bg-primary text-primary-foreground font-medium text-sm transition-all hover:shadow-[0_0_40px_hsl(190_100%_50%/0.4)]"
-              whileHover={{ scale: 1.02, y: -2 }}
-              whileTap={{ scale: 0.98 }}
+              className="px-10 py-4 rounded-full bg-primary text-primary-foreground font-medium text-sm transition-all hover:shadow-[0_0_50px_hsl(190_100%_50%/0.4)]"
             >
               View My Work
-            </motion.button>
-            <motion.button
+            </MagneticButton>
+            <MagneticButton
               onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-              className="px-8 py-4 rounded-full border border-border text-foreground font-medium text-sm transition-all hover:border-primary/50 hover:text-primary"
-              whileHover={{ scale: 1.02, y: -2 }}
-              whileTap={{ scale: 0.98 }}
+              className="px-10 py-4 rounded-full border border-border/50 text-foreground font-medium text-sm transition-all hover:border-primary/50 hover:text-primary"
             >
               Get In Touch
-            </motion.button>
+            </MagneticButton>
           </motion.div>
         </motion.div>
       </div>
@@ -148,17 +161,17 @@ const Hero = () => {
       {/* Scroll indicator */}
       <motion.button
         onClick={scrollToAbout}
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 3.2 }}
+        transition={{ delay: 3.5, duration: 0.8 }}
       >
-        <span className="text-xs tracking-widest">SCROLL</span>
+        <span className="text-[10px] tracking-[0.3em] uppercase">Scroll</span>
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ChevronDown size={20} />
+          <ChevronDown size={20} strokeWidth={1.5} />
         </motion.div>
       </motion.button>
     </section>
