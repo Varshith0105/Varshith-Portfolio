@@ -19,12 +19,10 @@ export const useCustomCursor = () => {
     isClicking: false,
     cursorType: "default",
   });
+  const dotPos = useRef({ x: 0, y: 0 });
+  const ringPos = useRef({ x: 0, y: 0 });
   const rafRef = useRef<number>();
   const magneticElements = useRef<Set<HTMLElement>>(new Set());
-
-  const lerp = (start: number, end: number, factor: number) => {
-    return start + (end - start) * factor;
-  };
 
   const updateCursor = useCallback(() => {
     const dot = cursorDotRef.current;
@@ -37,22 +35,18 @@ export const useCustomCursor = () => {
 
     const state = stateRef.current;
 
-    // Get current positions
-    const dotX = parseFloat(dot.style.left) || 0;
-    const dotY = parseFloat(dot.style.top) || 0;
-    const ringX = parseFloat(ring.style.left) || 0;
-    const ringY = parseFloat(ring.style.top) || 0;
+    // Smoother lerp with higher factor for dot, lower for ring
+    const dotLerp = 0.25;
+    const ringLerp = 0.12;
 
-    // Lerp to target with different speeds
-    const newDotX = lerp(dotX, state.x, 0.35);
-    const newDotY = lerp(dotY, state.y, 0.35);
-    const newRingX = lerp(ringX, state.x, 0.15);
-    const newRingY = lerp(ringY, state.y, 0.15);
+    dotPos.current.x += (state.x - dotPos.current.x) * dotLerp;
+    dotPos.current.y += (state.y - dotPos.current.y) * dotLerp;
+    ringPos.current.x += (state.x - ringPos.current.x) * ringLerp;
+    ringPos.current.y += (state.y - ringPos.current.y) * ringLerp;
 
-    dot.style.left = `${newDotX}px`;
-    dot.style.top = `${newDotY}px`;
-    ring.style.left = `${newRingX}px`;
-    ring.style.top = `${newRingY}px`;
+    // Use transform for better performance
+    dot.style.transform = `translate(${dotPos.current.x}px, ${dotPos.current.y}px) translate(-50%, -50%)`;
+    ring.style.transform = `translate(${ringPos.current.x}px, ${ringPos.current.y}px) translate(-50%, -50%)`;
 
     rafRef.current = requestAnimationFrame(updateCursor);
   }, []);
@@ -70,20 +64,20 @@ export const useCustomCursor = () => {
         Math.pow(e.clientX - centerX, 2) + Math.pow(e.clientY - centerY, 2)
       );
 
-      if (distance < 100) {
-        const pull = (100 - distance) / 100;
+      if (distance < 80) {
+        const pull = (80 - distance) / 80;
         gsap.to(element, {
-          x: (e.clientX - centerX) * pull * 0.4,
-          y: (e.clientY - centerY) * pull * 0.4,
-          duration: 0.3,
-          ease: "power2.out",
+          x: (e.clientX - centerX) * pull * 0.3,
+          y: (e.clientY - centerY) * pull * 0.3,
+          duration: 0.4,
+          ease: "power3.out",
         });
       } else {
         gsap.to(element, {
           x: 0,
           y: 0,
-          duration: 0.3,
-          ease: "power2.out",
+          duration: 0.4,
+          ease: "power3.out",
         });
       }
     });
@@ -99,32 +93,33 @@ export const useCustomCursor = () => {
     if (ring && dot) {
       if (cursorType === "link" || cursorType === "button") {
         gsap.to(ring, {
-          width: 60,
-          height: 60,
+          width: 50,
+          height: 50,
           borderColor: "hsl(190, 100%, 50%)",
-          duration: 0.3,
-          ease: "power2.out",
+          opacity: 0.8,
+          duration: 0.4,
+          ease: "power3.out",
         });
         gsap.to(dot, {
-          scale: 0.5,
+          scale: 0.6,
           backgroundColor: "hsl(190, 100%, 50%)",
-          duration: 0.3,
-          ease: "power2.out",
+          duration: 0.4,
+          ease: "power3.out",
         });
       } else if (cursorType === "card") {
         gsap.to(ring, {
-          width: 80,
-          height: 80,
+          width: 70,
+          height: 70,
           borderColor: "hsl(190, 100%, 50%)",
-          opacity: 0.5,
-          duration: 0.3,
-          ease: "power2.out",
+          opacity: 0.4,
+          duration: 0.4,
+          ease: "power3.out",
         });
         gsap.to(dot, {
-          scale: 1.5,
+          scale: 1.2,
           backgroundColor: "hsl(190, 100%, 50%)",
-          duration: 0.3,
-          ease: "power2.out",
+          duration: 0.4,
+          ease: "power3.out",
         });
       }
     }
@@ -139,18 +134,18 @@ export const useCustomCursor = () => {
 
     if (ring && dot) {
       gsap.to(ring, {
-        width: 40,
-        height: 40,
+        width: 36,
+        height: 36,
         borderColor: "hsl(190, 100%, 50%)",
         opacity: 1,
-        duration: 0.3,
-        ease: "power2.out",
+        duration: 0.4,
+        ease: "power3.out",
       });
       gsap.to(dot, {
         scale: 1,
         backgroundColor: "hsl(190, 100%, 50%)",
-        duration: 0.3,
-        ease: "power2.out",
+        duration: 0.4,
+        ease: "power3.out",
       });
     }
   }, []);
@@ -160,8 +155,8 @@ export const useCustomCursor = () => {
     const ring = cursorRingRef.current;
     if (ring) {
       gsap.to(ring, {
-        scale: 0.8,
-        duration: 0.1,
+        scale: 0.85,
+        duration: 0.15,
         ease: "power2.out",
       });
     }
@@ -173,8 +168,8 @@ export const useCustomCursor = () => {
     if (ring) {
       gsap.to(ring, {
         scale: 1,
-        duration: 0.2,
-        ease: "elastic.out(1, 0.5)",
+        duration: 0.3,
+        ease: "elastic.out(1, 0.4)",
       });
     }
   }, []);
@@ -188,14 +183,16 @@ export const useCustomCursor = () => {
     dot.className = "cursor-dot";
     dot.style.cssText = `
       position: fixed;
-      width: 8px;
-      height: 8px;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 6px;
       background: hsl(190, 100%, 50%);
       border-radius: 50%;
       pointer-events: none;
       z-index: 99999;
-      transform: translate(-50%, -50%);
       mix-blend-mode: difference;
+      will-change: transform;
     `;
     document.body.appendChild(dot);
     cursorDotRef.current = dot;
@@ -204,14 +201,16 @@ export const useCustomCursor = () => {
     ring.className = "cursor-ring";
     ring.style.cssText = `
       position: fixed;
-      width: 40px;
-      height: 40px;
+      top: 0;
+      left: 0;
+      width: 36px;
+      height: 36px;
       border: 1.5px solid hsl(190, 100%, 50%);
       border-radius: 50%;
       pointer-events: none;
       z-index: 99998;
-      transform: translate(-50%, -50%);
       mix-blend-mode: difference;
+      will-change: transform;
     `;
     document.body.appendChild(ring);
     cursorRingRef.current = ring;
@@ -220,7 +219,7 @@ export const useCustomCursor = () => {
     document.body.style.cursor = "none";
 
     // Add event listeners
-    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mousemove", handleMouseMove, { passive: true });
     document.addEventListener("mousedown", handleMouseDown);
     document.addEventListener("mouseup", handleMouseUp);
 
@@ -257,14 +256,18 @@ export const useCustomCursor = () => {
         (el as HTMLElement).style.cursor = "auto";
         el.addEventListener("mouseenter", () => {
           if (cursorDotRef.current && cursorRingRef.current) {
-            cursorDotRef.current.style.opacity = "0";
-            cursorRingRef.current.style.opacity = "0";
+            gsap.to([cursorDotRef.current, cursorRingRef.current], {
+              opacity: 0,
+              duration: 0.2,
+            });
           }
         });
         el.addEventListener("mouseleave", () => {
           if (cursorDotRef.current && cursorRingRef.current) {
-            cursorDotRef.current.style.opacity = "1";
-            cursorRingRef.current.style.opacity = "1";
+            gsap.to([cursorDotRef.current, cursorRingRef.current], {
+              opacity: 1,
+              duration: 0.2,
+            });
           }
         });
       });

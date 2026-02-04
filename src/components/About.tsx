@@ -12,9 +12,9 @@ const About = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const stats = [
-    { icon: Brain, label: "AI/ML Focus", value: "3+ Years" },
-    { icon: Code, label: "Projects Built", value: "20+" },
-    { icon: Sparkles, label: "Models Trained", value: "50+" },
+    { icon: Brain, label: "AI/ML Focus", value: "2+ Years" },
+    { icon: Code, label: "Projects Built", value: "10+" },
+    { icon: Sparkles, label: "Certifications", value: "6+" },
   ];
 
   useEffect(() => {
@@ -66,20 +66,18 @@ const About = () => {
 
             <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
               <p className="about-text-reveal">
-                I'm an <span className="text-foreground">AI Engineer</span> passionate about 
-                developing intelligent systems that solve real-world problems. My journey into 
-                machine learning began with a fascination for how algorithms can learn and 
-                evolve—much like the human mind.
+                I'm a <span className="text-foreground">Computer Science student at VIT-AP</span> and aspiring 
+                AI Engineer, specializing in Artificial Intelligence and Machine Learning. My focus is on building 
+                and deploying end-to-end AI systems using Python and deep learning frameworks.
               </p>
               <p className="about-text-reveal">
-                From building <span className="text-foreground">computer vision models</span> that 
-                detect diseases to creating <span className="text-foreground">financial AI assistants</span>, 
-                I specialize in turning complex data into actionable insights.
+                I have strong expertise in <span className="text-foreground">scalable ML pipelines</span>, 
+                cloud-native deployment with <span className="text-foreground">AWS & Azure</span>, model optimization, 
+                and responsible AI practices. From drug discovery to stock prediction—I turn complex problems into intelligent solutions.
               </p>
               <p className="about-text-reveal">
-                When I'm not training neural networks, you'll find me exploring the latest 
-                research papers, contributing to open-source projects, or experimenting with 
-                cutting-edge MLOps practices.
+                Currently working on LLM applications, prompt engineering, and GenAI-powered analytics while pursuing 
+                certifications in cloud architecture and AI foundations.
               </p>
             </div>
 

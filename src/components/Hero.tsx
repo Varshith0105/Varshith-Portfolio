@@ -131,8 +131,8 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 2.8, ease: [0.22, 1, 0.36, 1] }}
           >
-            I build <span className="text-foreground font-medium">intelligent AI-driven solutions</span> that 
-            push the boundaries of what's possible with Machine Learning & Deep Learning.
+            <span className="text-foreground font-medium">AI Engineer</span> specializing in Machine Learning, 
+            Deep Learning, Computer Vision & MLOps. Building scalable AI systems that solve real-world problems.
           </motion.p>
 
           {/* CTA Buttons */}

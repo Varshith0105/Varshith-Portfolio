@@ -18,60 +18,60 @@ const skills = [
     category: "AI & Machine Learning",
     icon: Brain,
     items: [
-      { name: "Machine Learning", level: 95 },
-      { name: "Deep Learning", level: 90 },
-      { name: "Neural Networks", level: 88 },
-      { name: "NLP", level: 85 },
+      { name: "Machine Learning", level: 90 },
+      { name: "Deep Learning", level: 88 },
+      { name: "LLMs & Prompt Eng.", level: 85 },
+      { name: "GenAI", level: 82 },
     ],
   },
   {
     category: "Computer Vision",
     icon: Eye,
     items: [
-      { name: "Image Classification", level: 92 },
-      { name: "Object Detection", level: 88 },
+      { name: "Image Classification", level: 88 },
       { name: "Medical Imaging", level: 85 },
-      { name: "OpenCV", level: 90 },
+      { name: "Object Detection", level: 82 },
+      { name: "OpenCV", level: 85 },
     ],
   },
   {
     category: "Frameworks & Tools",
     icon: Layers,
     items: [
-      { name: "TensorFlow", level: 90 },
-      { name: "PyTorch", level: 88 },
-      { name: "Scikit-learn", level: 92 },
-      { name: "Keras", level: 90 },
+      { name: "TensorFlow", level: 88 },
+      { name: "PyTorch", level: 85 },
+      { name: "Scikit-learn", level: 90 },
+      { name: "Flask/FastAPI", level: 85 },
     ],
   },
   {
     category: "Programming",
     icon: Code2,
     items: [
-      { name: "Python", level: 95 },
+      { name: "Python", level: 92 },
       { name: "SQL", level: 85 },
-      { name: "JavaScript", level: 75 },
-      { name: "C++", level: 70 },
+      { name: "JavaScript/TypeScript", level: 80 },
+      { name: "React", level: 78 },
     ],
   },
   {
-    category: "MLOps & Cloud",
+    category: "Cloud & MLOps",
     icon: Cpu,
     items: [
-      { name: "Docker", level: 82 },
-      { name: "MLflow", level: 85 },
-      { name: "AWS/GCP", level: 78 },
-      { name: "CI/CD", level: 80 },
+      { name: "AWS", level: 82 },
+      { name: "Azure", level: 78 },
+      { name: "Docker", level: 80 },
+      { name: "Supabase", level: 85 },
     ],
   },
   {
     category: "Data & Analytics",
     icon: BarChart3,
     items: [
-      { name: "Pandas", level: 95 },
-      { name: "NumPy", level: 95 },
-      { name: "Data Viz", level: 88 },
-      { name: "Feature Engineering", level: 90 },
+      { name: "Pandas/NumPy", level: 92 },
+      { name: "Data Visualization", level: 88 },
+      { name: "Feature Engineering", level: 85 },
+      { name: "ETL Pipelines", level: 80 },
     ],
   },
 ];
@@ -168,7 +168,7 @@ const Skills = () => {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 1, duration: 0.8 }}
         >
-          {["Python", "TensorFlow", "PyTorch", "Keras", "OpenCV", "Docker", "MLflow", "AWS"].map((tech, index) => (
+          {["Python", "TensorFlow", "PyTorch", "React", "TypeScript", "AWS", "Azure", "Supabase"].map((tech, index) => (
             <motion.span
               key={tech}
               className="px-5 py-2.5 rounded-full border border-border/50 text-sm text-muted-foreground hover:border-primary/40 hover:text-primary transition-all duration-300 cursor-default"
