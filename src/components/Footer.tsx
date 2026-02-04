@@ -23,9 +23,7 @@ const Footer = () => {
 
           {/* Copyright */}
           <p className="text-sm text-muted-foreground flex items-center gap-2">
-            © {currentYear} Varshith Julakanti. Built with
-            <Heart size={14} className="text-primary" fill="hsl(var(--primary))" />
-            and lots of coffee.
+            © {currentYear} Built By Varshith Julakanti. 
           </p>
 
           {/* Back to top */}
