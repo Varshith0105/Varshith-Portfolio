@@ -8,43 +8,31 @@ gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
-    title: "Brain Tumor Detection",
-    description: "Deep learning model for automated brain tumor detection and classification from MRI scans using CNN architecture with 96% accuracy.",
-    tech: ["Python", "TensorFlow", "CNN", "OpenCV", "Medical Imaging"],
+    title: "AI-Powered Drug Discovery",
+    description: "End-to-end Drug–Target Interaction prediction system using CNN-based deep learning. Features explainable AI with confidence scores and Supabase Edge Functions for serverless inference.",
+    tech: ["React", "TypeScript", "TensorFlow", "Supabase", "Vercel"],
     color: "from-cyan-500/20 to-blue-500/20",
     featured: true,
+    liveUrl: "https://drug-discovery-ai-cnn-based.vercel.app/",
+    github: "https://github.com/Varshith0105",
   },
   {
     title: "Skin Disease Detection",
-    description: "HAM10000 dataset-based classifier for identifying seven types of skin lesions using transfer learning with EfficientNet.",
-    tech: ["PyTorch", "Transfer Learning", "EfficientNet", "Data Augmentation"],
+    description: "Full-stack AI dermatology assistant using TensorFlow. Includes patient data capture, prediction rendering, PDF reports, and WhatsApp integration for sharing results.",
+    tech: ["TensorFlow", "Flask", "HTML/CSS/JS", "Netlify", "Render"],
     color: "from-purple-500/20 to-pink-500/20",
     featured: true,
+    liveUrl: "https://smartskindisease-predection-ai.netlify.app/",
+    github: "https://github.com/Varshith0105",
   },
   {
-    title: "Financial Health Assistant",
-    description: "AI-powered financial advisor for students featuring budget tracking, expense prediction, and personalized savings recommendations.",
-    tech: ["Python", "NLP", "Flask", "Machine Learning", "React"],
+    title: "StockAI - Price Prediction",
+    description: "AI-based stock price forecasting web app using real-time market data. Implements Linear Regression with interactive dashboards for actual vs predicted prices.",
+    tech: ["Python", "Linear Regression", "React", "Real-time Data"],
     color: "from-green-500/20 to-emerald-500/20",
     featured: true,
-  },
-  {
-    title: "Real-time Object Detection",
-    description: "YOLO-based object detection system optimized for edge devices with custom training pipeline and inference optimization.",
-    tech: ["YOLOv8", "OpenCV", "ONNX", "Edge Computing"],
-    color: "from-orange-500/20 to-yellow-500/20",
-  },
-  {
-    title: "Sentiment Analysis API",
-    description: "Production-ready NLP API for sentiment analysis with multi-language support and real-time processing capabilities.",
-    tech: ["Transformers", "FastAPI", "Docker", "Kubernetes"],
-    color: "from-red-500/20 to-rose-500/20",
-  },
-  {
-    title: "MLOps Pipeline",
-    description: "End-to-end ML pipeline with automated training, evaluation, versioning, and deployment using modern MLOps practices.",
-    tech: ["MLflow", "DVC", "Airflow", "Terraform"],
-    color: "from-indigo-500/20 to-violet-500/20",
+    liveUrl: "https://stockpredectionai.vercel.app/",
+    github: "https://github.com/Varshith0105",
   },
 ];
 
@@ -106,7 +94,7 @@ const Projects = () => {
 
         {/* Featured Projects */}
         <div className="grid lg:grid-cols-3 gap-8 mb-10">
-          {projects.filter(p => p.featured).map((project, index) => (
+          {projects.filter(p => p.featured).map((project) => (
             <div
               key={project.title}
               className="project-card-item project-card group relative perspective-1000"
@@ -126,20 +114,26 @@ const Projects = () => {
                   <motion.div
                     className="absolute inset-0 bg-background/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center gap-5"
                   >
-                    <motion.button
+                    <motion.a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="w-14 h-14 rounded-full bg-background border border-border flex items-center justify-center text-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-colors"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
                     >
                       <Github size={22} />
-                    </motion.button>
-                    <motion.button
+                    </motion.a>
+                    <motion.a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="w-14 h-14 rounded-full bg-background border border-border flex items-center justify-center text-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-colors"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
                     >
                       <ExternalLink size={22} />
-                    </motion.button>
+                    </motion.a>
                   </motion.div>
                 </div>
 
@@ -168,46 +162,6 @@ const Projects = () => {
           ))}
         </div>
 
-        {/* Other Projects */}
-        <div className="grid md:grid-cols-3 gap-6">
-          {projects.filter(p => !p.featured).map((project, index) => (
-            <div
-              key={project.title}
-              className="project-card-item project-card group"
-            >
-              <div className="glass-card rounded-xl p-8 h-full hover:border-primary/30 transition-all duration-500">
-                <div className="flex items-start justify-between mb-6">
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${project.color} flex items-center justify-center`}>
-                    <span className="text-lg font-display font-bold text-foreground">
-                      {project.title.charAt(0)}
-                    </span>
-                  </div>
-                  <div className="flex gap-3">
-                    <Github size={18} className="text-muted-foreground hover:text-primary cursor-pointer transition-colors" />
-                    <ExternalLink size={18} className="text-muted-foreground hover:text-primary cursor-pointer transition-colors" />
-                  </div>
-                </div>
-                <h3 className="font-display font-semibold text-lg mb-3 group-hover:text-primary transition-colors duration-300">
-                  {project.title}
-                </h3>
-                <p className="text-muted-foreground text-sm mb-5 line-clamp-2 leading-relaxed">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.slice(0, 3).map((t) => (
-                    <span
-                      key={t}
-                      className="text-xs text-muted-foreground"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
         {/* View all button */}
         <motion.div
           className="text-center mt-16"
@@ -215,14 +169,17 @@ const Projects = () => {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 1 }}
         >
-          <motion.button
+          <motion.a
+            href="https://github.com/Varshith0105"
+            target="_blank"
+            rel="noopener noreferrer"
             className="px-10 py-4 rounded-full border border-border/50 text-foreground font-medium text-sm transition-all hover:border-primary/40 hover:text-primary inline-flex items-center gap-2"
             whileHover={{ scale: 1.02, y: -2 }}
             whileTap={{ scale: 0.98 }}
           >
-            View All Projects
+            View All Projects on GitHub
             <ArrowUpRight size={16} />
-          </motion.button>
+          </motion.a>
         </motion.div>
       </div>
     </section>

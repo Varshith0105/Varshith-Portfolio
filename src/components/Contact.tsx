@@ -5,7 +5,7 @@ import MagneticButton from "./MagneticButton";
 
 const socialLinks = [
   { icon: Github, label: "GitHub", href: "https://github.com/Varshith0105" },
-  { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/_.varshith_.7/?hl=en" },
+  { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/_.varshith_.7/" },
   { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/varshith-j-6b2446300/" },
   { icon: Mail, label: "Email", href: "mailto:varshithjulakanti@gmail.com" },
 ];
@@ -100,7 +100,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">Location</p>
-                  <p className="font-medium">Hyderabad,Telangana,India</p>
+                  <p className="font-medium">Amaravati, Andhra Pradesh, India</p>
                 </div>
               </motion.div>
             </div>
