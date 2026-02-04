@@ -1,73 +1,141 @@
-# Welcome to your Lovable project
+# 🌐 Interactive Developer Portfolio
 
-## Project info
+A modern, high-performance, interactive developer portfolio built using **Vite + React + Tailwind CSS**, integrated with **Supabase** and deployed on **Netlify**.  
+Designed with smooth animations, clean UI, and scalable architecture to showcase projects, skills, and experience professionally.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+---
 
-## How can I edit this code?
+## 🚀 Live Demo
 
-There are several ways of editing your application.
+🔗 **Deployed on Netlify:**  
+👉 https://interactive-vaporwave-portfolio.netlify.app/
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## 🧠 About the Project
 
-Changes made via Lovable will be committed automatically to this repo.
+This portfolio is designed to present a strong developer brand with:
 
-**Use your preferred IDE**
+- Smooth page transitions and animations
+- Clean, dark-themed UI
+- Scalable component architecture
+- Supabase integration for backend services
+- Optimized build using Vite
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+The project focuses on **performance, readability, and real-world deployment practices**.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+---
 
-Follow these steps:
+## 🛠️ Tech Stack
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Frontend
+- **Vite**
+- **React**
+- **TypeScript**
+- **Tailwind CSS**
+- **ShadCN UI**
+- **Framer Motion / GSAP** (animations)
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Backend & Services
+- **Supabase** (Database & APIs)
 
-# Step 3: Install the necessary dependencies.
-npm i
+### Tooling & DevOps
+- **Bun / npm**
+- **ESLint**
+- **PostCSS**
+- **Netlify** (Deployment)
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+---
+
+## 📁 Project Structure
+
+```bash
+├── src/                # Application source code
+│   ├── components/     # Reusable UI components
+│   ├── pages/          # Page-level components
+│   ├── lib/            # Utilities & helpers
+│   ├── styles/         # Global styles
+│   └── main.tsx        # App entry point
+│
+├── supabase/           # Supabase configuration
+├── public/             # Static assets
+├── index.html          # HTML entry
+├── tailwind.config.ts  # Tailwind configuration
+├── package.json        # Dependencies & scripts
+└── README.md           # Project documentation
 ```
 
-**Edit a file directly in GitHub**
+🧪 Local Development
+1️⃣ Install dependencies
+```
+npm install
+# or
+bun install
+```
+2️⃣ Start development server
+```
+npm run dev
+# or
+bun run dev
+```
+App will run at:
+```
+http://localhost:5173
+```
+🌍 Deployment (Netlify)
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Build Settings:
 
-**Use GitHub Codespaces**
+Setting	Value
+Base directory	(empty)
+Build command	npm run build or bun run build
+Publish directory	dist
+Functions directory	(empty)
+SPA Redirect (Required)
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Create public/_redirects:
+```
+/*    /index.html   200
+```
+✨ Features
 
-## What technologies are used for this project?
+⚡ Lightning-fast Vite build
 
-This project is built with:
+🎨 Dark-mode modern UI
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+🧩 Component-based architecture
 
-## How can I deploy this project?
+🔐 Supabase integration
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+🚀 Production-ready deployment
 
-## Can I connect a custom domain to my Lovable project?
+📱 Fully responsive
 
-Yes, you can!
+📌 Future Enhancements
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Custom cursor animations
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Advanced page transitions
+
+3D hero section
+
+SEO optimization
+
+Contact form with backend logic
+
+Analytics integration
+
+👤 Author
+
+Varshith Julakanti
+📍 Amaravati, Andhra Pradesh, India
+
+🔗 GitHub: https://github.com/Varshith0105
+
+📧 Email: varshithjulakanti@gmail.com
+
+📄 License
+
+This project is open-source and available under the MIT License.
+
+⭐ If you like this project, give it a star on GitHub!
