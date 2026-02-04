@@ -12,7 +12,7 @@ export default {
         "2xl": "1400px",
       },
     },
-    extend: {
+    extend: { 
       fontFamily: {
         display: ['Space Grotesk', 'sans-serif'],
         body: ['Inter', 'sans-serif'],
