@@ -4,6 +4,11 @@ import { ExternalLink, Github, ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+// Import project images
+import drugDiscoveryImg from "@/assets/project-drug-discovery.jpg";
+import skinDetectionImg from "@/assets/project-skin-detection.jpg";
+import stockAiImg from "@/assets/project-stock-ai.jpg";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
@@ -15,6 +20,7 @@ const projects = [
     featured: true,
     liveUrl: "https://drug-discovery-ai-cnn-based.vercel.app/",
     github: "https://github.com/Varshith0105",
+    image: drugDiscoveryImg,
   },
   {
     title: "Skin Disease Detection",
@@ -24,6 +30,7 @@ const projects = [
     featured: true,
     liveUrl: "https://smartskindisease-predection-ai.netlify.app/",
     github: "https://github.com/Varshith0105",
+    image: skinDetectionImg,
   },
   {
     title: "StockAI - Price Prediction",
@@ -33,6 +40,7 @@ const projects = [
     featured: true,
     liveUrl: "https://stockpredectionai.vercel.app/",
     github: "https://github.com/Varshith0105",
+    image: stockAiImg,
   },
 ];
 
@@ -44,7 +52,6 @@ const Projects = () => {
     if (!ref.current) return;
 
     const ctx = gsap.context(() => {
-      // Animate project cards with stagger
       gsap.fromTo(
         ".project-card-item",
         { y: 80, opacity: 0, rotateX: -10 },
@@ -100,15 +107,15 @@ const Projects = () => {
               className="project-card-item project-card group relative perspective-1000"
             >
               <div className="glass-card rounded-2xl overflow-hidden h-full transition-all duration-500 group-hover:border-primary/30">
-                {/* Project gradient header */}
-                <div className={`h-52 bg-gradient-to-br ${project.color} relative overflow-hidden`}>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-24 h-24 rounded-2xl bg-background/20 backdrop-blur-xl flex items-center justify-center border border-white/10">
-                      <span className="text-4xl font-display font-bold text-foreground">
-                        {project.title.charAt(0)}
-                      </span>
-                    </div>
-                  </div>
+                {/* Project image header */}
+                <div className="h-52 relative overflow-hidden">
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className={`absolute inset-0 bg-gradient-to-t ${project.color} opacity-60`} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
                   
                   {/* Hover overlay */}
                   <motion.div

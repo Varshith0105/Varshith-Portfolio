@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import TechFlow from "./TechFlow";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -161,25 +162,17 @@ const Skills = () => {
           ))}
         </div>
 
-        {/* Tech badges */}
+        {/* Dynamic Tech Flow */}
         <motion.div
-          className="mt-20 flex flex-wrap justify-center gap-4"
+          className="mt-16"
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 1, duration: 0.8 }}
+          transition={{ delay: 0.8, duration: 0.8 }}
         >
-          {["Python", "TensorFlow", "PyTorch", "React", "TypeScript", "AWS", "Azure", "Supabase"].map((tech, index) => (
-            <motion.span
-              key={tech}
-              className="px-5 py-2.5 rounded-full border border-border/50 text-sm text-muted-foreground hover:border-primary/40 hover:text-primary transition-all duration-300 cursor-default"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ delay: 1.1 + index * 0.05, ease: [0.22, 1, 0.36, 1] }}
-              whileHover={{ scale: 1.05, y: -2 }}
-            >
-              {tech}
-            </motion.span>
-          ))}
+          <p className="text-center text-sm text-muted-foreground mb-6 tracking-wide">
+            Technologies I work with
+          </p>
+          <TechFlow />
         </motion.div>
       </div>
     </section>
