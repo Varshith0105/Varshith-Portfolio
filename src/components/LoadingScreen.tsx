@@ -13,7 +13,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
+      const tl = gsap.timeline({ 
         onComplete: () => {
           gsap.to(containerRef.current, {
             opacity: 0,
