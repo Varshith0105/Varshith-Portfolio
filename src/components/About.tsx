@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect } from "react";
-import { MapPin, Sparkles, Brain, Code } from "lucide-react";
+import { MapPin, Sparkles, Brain, Code, Download } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -124,6 +124,22 @@ const About = () => {
                   </div>
                 </motion.div>
               ))}
+
+              {/* Download Resume Button */}
+              <motion.a
+                href="https://drive.google.com/file/d/1hupEzCNcy2x8hjomVLXSCZIAIaneAxO_/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-3 py-4 px-8 rounded-2xl border border-primary/30 text-primary font-medium text-sm hover:bg-primary/10 hover:border-primary/50 transition-all duration-300 group"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.85, duration: 0.6 }}
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Download size={18} />
+                Download Resume
+              </motion.a>
             </div>
 
             {/* Visual accent */}

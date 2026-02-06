@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
-import { ChevronDown, Download } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import gsap from "gsap";
 import MagneticButton from "./MagneticButton";
 
@@ -148,20 +148,6 @@ const Hero = () => {
             >
               View My Work
             </MagneticButton>
-            <a
-              href="https://drive.google.com/file/d/1hupEzCNcy2x8hjomVLXSCZIAIaneAxO_/view?usp=sharing"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block"
-            >
-              <MagneticButton
-                onClick={() => {}}
-                className="px-10 py-4 rounded-full border border-border/50 text-foreground font-medium text-sm transition-all hover:border-primary/50 hover:text-primary flex items-center gap-2"
-              >
-                <Download size={18} />
-                Download Resume
-              </MagneticButton>
-            </a>
             <MagneticButton
               onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
               className="px-10 py-4 rounded-full border border-border/50 text-foreground font-medium text-sm transition-all hover:border-primary/50 hover:text-primary"
