@@ -8,7 +8,7 @@ Designed with smooth animations, clean UI, and scalable architecture to showcase
 ## 🚀 Live Demo
 
 🔗 **Deployed on Netlify:**  
-👉 https://interactive-vaporwave-portfolio.netlify.app/
+👉 https://varshith-portfolio-omega.vercel.app/
 
 ---
 
