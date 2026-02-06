@@ -19,7 +19,7 @@ const projects = [
     color: "from-cyan-500/20 to-blue-500/20",
     featured: true,
     liveUrl: "https://drug-discovery-ai-cnn-based.vercel.app/",
-    github: "https://github.com/Varshith0105",
+    github: "https://github.com/Varshith0105/Drug_Discovery_AI_CNN-Based",
     image: drugDiscoveryImg,
   },
   {
@@ -28,8 +28,8 @@ const projects = [
     tech: ["TensorFlow", "Flask", "HTML/CSS/JS", "Netlify", "Render"],
     color: "from-purple-500/20 to-pink-500/20",
     featured: true,
-    liveUrl: "https://smartskindisease-predection-ai.netlify.app/",
-    github: "https://github.com/Varshith0105",
+    liveUrl: "https://skin-disease-varshith0105s-projects.vercel.app/",
+    github: "https://github.com/Varshith0105/SkinDisease",
     image: skinDetectionImg,
   },
   {
@@ -39,7 +39,7 @@ const projects = [
     color: "from-green-500/20 to-emerald-500/20",
     featured: true,
     liveUrl: "https://stockpredectionai.vercel.app/",
-    github: "https://github.com/Varshith0105",
+    github: "https://github.com/Varshith0105/stock-predictor-pro",
     image: stockAiImg,
   },
 ];
