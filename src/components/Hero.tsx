@@ -172,17 +172,18 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll down button */}
       <motion.button
         onClick={scrollToAbout}
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-muted-foreground hover:text-primary transition-colors group"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 3.5, duration: 0.8 }}
       >
-        <span className="text-[10px] tracking-[0.3em] uppercase">Scroll</span>
+        <span className="text-[10px] tracking-[0.3em] uppercase">Scroll Down</span>
         <motion.div
-          animate={{ y: [0, 10, 0] }}
+          className="w-10 h-10 rounded-full border border-border/50 flex items-center justify-center group-hover:border-primary/50 transition-colors"
+          animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
           <ChevronDown size={20} strokeWidth={1.5} />

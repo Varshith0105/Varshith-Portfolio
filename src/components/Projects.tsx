@@ -106,7 +106,11 @@ const Projects = () => {
               key={project.title}
               className="project-card-item project-card group relative perspective-1000"
             >
-              <div className="glass-card rounded-2xl overflow-hidden h-full transition-all duration-500 group-hover:border-primary/30">
+                <motion.div 
+                  className="glass-card rounded-2xl overflow-hidden h-full transition-all duration-500 group-hover:border-primary/30"
+                  whileHover={{ scale: 1.03, y: -8 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                >
                 {/* Project image header */}
                 <div className="h-52 relative overflow-hidden">
                   <img 
@@ -164,7 +168,7 @@ const Projects = () => {
                     ))}
                   </div>
                 </div>
-              </div>
+                </motion.div>
             </div>
           ))}
         </div>

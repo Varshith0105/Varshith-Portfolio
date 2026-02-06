@@ -78,10 +78,6 @@ const Contact = () => {
 
       toast.success("Message sent successfully!", {
         description: "I'll get back to you soon. Thank you for reaching out!",
-        action: data?.whatsappLink ? {
-          label: "Open WhatsApp",
-          onClick: () => window.open(data.whatsappLink, '_blank'),
-        } : undefined,
       });
       
       setFormState({ name: "", email: "", message: "" });
