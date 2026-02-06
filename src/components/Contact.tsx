@@ -167,16 +167,16 @@ const Contact = () => {
                 className="flex items-center gap-5 p-6 glass-card rounded-2xl group hover:border-primary/40 transition-all duration-500"
                 whileHover={{ x: 6 }}
               >
-                <div className="w-14 h-14 rounded-xl bg-green-500/10 flex items-center justify-center group-hover:bg-green-500/20 transition-colors duration-500">
-                  <MessageCircle size={22} className="text-green-500" />
+                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-500">
+                  <MessageCircle size={22} className="text-primary" />
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">WhatsApp</p>
-                  <p className="font-medium group-hover:text-green-500 transition-colors duration-300">
+                  <p className="font-medium group-hover:text-primary transition-colors duration-300">
                     +91 7842524222
                   </p>
                 </div>
-                <ArrowUpRight size={18} className="ml-auto text-muted-foreground group-hover:text-green-500 transition-all duration-300 transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                <ArrowUpRight size={18} className="ml-auto text-muted-foreground group-hover:text-primary transition-all duration-300 transform group-hover:translate-x-1 group-hover:-translate-y-1" />
               </motion.a>
 
               <motion.div
