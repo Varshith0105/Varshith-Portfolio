@@ -76,15 +76,6 @@ const skills = [
     ],
   },
   {
-    category: "Databases & Data",
-    icon: BarChart3,
-    items: [
-      { name: "MySQL", level: 85 },
-      { name: "PostgreSQL", level: 82 },
-      { name: "MongoDB", level: 80 },
-    ],
-  },
-  {
     category: "Dev & Workflow Tools",
     icon: Code2,
     items: [
