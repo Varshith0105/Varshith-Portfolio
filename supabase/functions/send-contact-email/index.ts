@@ -83,17 +83,10 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log("Email sent successfully:", emailResponse);
 
-    // Generate WhatsApp link for quick response
-    const whatsappMessage = encodeURIComponent(
-      `New contact from portfolio!\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
-    );
-    const whatsappLink = `https://wa.me/917842524222?text=${whatsappMessage}`;
-
     return new Response(
       JSON.stringify({ 
         success: true, 
         message: "Email sent successfully!",
-        whatsappLink 
       }),
       {
         status: 200,
