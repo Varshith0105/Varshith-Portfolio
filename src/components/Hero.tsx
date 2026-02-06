@@ -149,8 +149,9 @@ const Hero = () => {
               View My Work
             </MagneticButton>
             <a
-              href="/resume/Varshith_Julakanti_Resume.pdf"
-              download="Varshith_Julakanti_Resume.pdf"
+              href="https://drive.google.com/file/d/1hupEzCNcy2x8hjomVLXSCZIAIaneAxO_/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block"
             >
               <MagneticButton
