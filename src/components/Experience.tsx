@@ -3,6 +3,7 @@ import { useRef, useEffect } from "react";
 import { Calendar, MapPin, ArrowRight } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import TiltCard from "./TiltCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -65,7 +66,6 @@ const Experience = () => {
     if (!ref.current) return;
 
     const ctx = gsap.context(() => {
-      // Animate timeline items
       gsap.fromTo(
         ".timeline-item",
         { x: -50, opacity: 0 },
@@ -122,7 +122,7 @@ const Experience = () => {
           <div className="space-y-16">
             {experiences.map((exp, index) => (
               <div
-                key={exp.period}
+                key={exp.period + exp.title}
                 className={`timeline-item relative flex flex-col md:flex-row gap-10 ${
                   index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                 }`}
@@ -137,40 +137,38 @@ const Experience = () => {
 
                 {/* Content */}
                 <div className={`md:w-1/2 pl-10 md:pl-0 ${index % 2 === 0 ? "md:pr-16 md:text-right" : "md:pl-16"}`}>
-                  <motion.div
-                    className="glass-card p-8 rounded-2xl group hover:shadow-[0_0_30px_hsl(190_100%_50%/0.1)]"
-                    whileHover={{ scale: 1.03, y: -6, borderColor: "hsl(var(--primary) / 0.4)" }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  >
-                    {/* Period badge */}
-                    <div className={`flex items-center gap-2 mb-6 ${index % 2 === 0 ? "md:justify-end" : ""}`}>
-                      <Calendar size={14} className="text-primary" />
-                      <span className="text-sm text-primary font-medium tracking-wide">{exp.period}</span>
-                    </div>
+                  <TiltCard>
+                    <div className="p-8">
+                      {/* Period badge */}
+                      <div className={`flex items-center gap-2 mb-6 ${index % 2 === 0 ? "md:justify-end" : ""}`}>
+                        <Calendar size={14} className="text-primary" />
+                        <span className="text-sm text-primary font-medium tracking-wide">{exp.period}</span>
+                      </div>
 
-                    <h3 className="font-display font-semibold text-xl mb-2">{exp.title}</h3>
-                    <p className="text-muted-foreground mb-3">{exp.company}</p>
-                    
-                    <div className={`flex items-center gap-2 mb-6 text-sm text-muted-foreground ${index % 2 === 0 ? "md:justify-end" : ""}`}>
-                      <MapPin size={14} />
-                      <span>{exp.location}</span>
-                    </div>
+                      <h3 className="font-display font-semibold text-xl mb-2 group-hover:text-primary transition-colors duration-300">{exp.title}</h3>
+                      <p className="text-muted-foreground mb-3">{exp.company}</p>
+                      
+                      <div className={`flex items-center gap-2 mb-6 text-sm text-muted-foreground ${index % 2 === 0 ? "md:justify-end" : ""}`}>
+                        <MapPin size={14} />
+                        <span>{exp.location}</span>
+                      </div>
 
-                    <p className="text-muted-foreground text-sm mb-6 leading-relaxed">{exp.description}</p>
+                      <p className="text-muted-foreground text-sm mb-6 leading-relaxed">{exp.description}</p>
 
-                    {/* Highlights */}
-                    <div className="space-y-2">
-                      {exp.highlights.map((highlight) => (
-                        <div
-                          key={highlight}
-                          className={`flex items-center gap-2 text-sm ${index % 2 === 0 ? "md:flex-row-reverse" : ""}`}
-                        >
-                          <ArrowRight size={14} className="text-primary flex-shrink-0" />
-                          <span className="text-foreground/80">{highlight}</span>
-                        </div>
-                      ))}
+                      {/* Highlights */}
+                      <div className="space-y-2">
+                        {exp.highlights.map((highlight) => (
+                          <div
+                            key={highlight}
+                            className={`flex items-center gap-2 text-sm ${index % 2 === 0 ? "md:flex-row-reverse" : ""}`}
+                          >
+                            <ArrowRight size={14} className="text-primary flex-shrink-0" />
+                            <span className="text-foreground/80">{highlight}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </motion.div>
+                  </TiltCard>
                 </div>
 
                 {/* Empty space for timeline layout */}
