@@ -95,11 +95,12 @@ const Certificates = () => {
             <motion.div
               key={cert.title}
               className="group relative"
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              initial={{ opacity: 0, y: 40, rotateX: -8 }}
+              animate={isInView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
               transition={{ delay: index * 0.1, duration: 0.6 }}
+              whileHover={{ scale: 1.04, y: -8 }}
             >
-              <div className="glass-card rounded-2xl p-6 h-full transition-all duration-500 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10">
+              <div className="glass-card rounded-2xl p-6 h-full transition-all duration-500 hover:border-primary/40 hover:shadow-[0_0_30px_hsl(190_100%_50%/0.1)]">
                 {/* Gradient header */}
                 <div className={`w-full h-24 rounded-xl bg-gradient-to-br ${cert.color} flex items-center justify-center mb-5 relative overflow-hidden`}>
                   <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent" />

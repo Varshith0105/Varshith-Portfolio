@@ -141,8 +141,8 @@ const Contact = () => {
                 href="mailto:varshithjulakanti@gmail.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-5 p-6 glass-card rounded-2xl group hover:border-primary/40 transition-all duration-500"
-                whileHover={{ x: 6 }}
+                className="flex items-center gap-5 p-6 glass-card rounded-2xl group hover:border-primary/40 hover:shadow-[0_0_20px_hsl(190_100%_50%/0.08)] transition-all duration-500"
+                whileHover={{ x: 6, scale: 1.02 }}
               >
                 <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-500">
                   <Mail size={22} className="text-primary" />
@@ -160,8 +160,8 @@ const Contact = () => {
                 href="https://wa.me/917842524222"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-5 p-6 glass-card rounded-2xl group hover:border-primary/40 transition-all duration-500"
-                whileHover={{ x: 6 }}
+                className="flex items-center gap-5 p-6 glass-card rounded-2xl group hover:border-primary/40 hover:shadow-[0_0_20px_hsl(190_100%_50%/0.08)] transition-all duration-500"
+                whileHover={{ x: 6, scale: 1.02 }}
               >
                 <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-500">
                   <MessageCircle size={22} className="text-primary" />
