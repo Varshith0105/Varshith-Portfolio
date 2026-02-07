@@ -64,7 +64,7 @@ const Hero = () => {
   };
 
   return (
-    <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden pt-20 pb-24">
       {/* Background effects */}
       <div className="absolute inset-0 hero-gradient" />
       
