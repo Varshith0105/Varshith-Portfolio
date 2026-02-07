@@ -127,9 +127,8 @@ const About = () => {
 
               {/* Download Resume Button */}
               <motion.a
-                href="https://drive.google.com/file/d/1hupEzCNcy2x8hjomVLXSCZIAIaneAxO_/view?usp=sharing"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/resume/Varshith_Julakanti_AI_Engineer_Resume.pdf"
+                download
                 className="flex items-center justify-center gap-3 py-4 px-8 rounded-2xl border border-primary/30 text-primary font-medium text-sm hover:bg-primary/10 hover:border-primary/50 transition-all duration-300 group"
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}

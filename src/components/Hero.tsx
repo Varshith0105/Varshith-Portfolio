@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import { ChevronDown } from "lucide-react";
 import gsap from "gsap";
 import MagneticButton from "./MagneticButton";
+import TerminalWidget from "./TerminalWidget";
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -102,60 +103,68 @@ const Hero = () => {
       />
 
       {/* Content */}
-      <div className="relative z-10 container-custom text-center">
-        <motion.div style={{ x: textX, y: textY }}>
-          {/* Greeting */}
-          <motion.p
-            className="text-primary font-medium mb-8 tracking-[0.3em] text-xs uppercase"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 2.2, ease: [0.22, 1, 0.36, 1] }}
-          >
-            Welcome to my portfolio
-          </motion.p>
-
-          {/* Name with GSAP reveal */}
-          <h1 ref={titleRef} className="text-display mb-8 perspective-1000">
-            <span className="hero-line block text-foreground/90 overflow-hidden">
-              Hi, I'm
-            </span>
-            <span className="hero-line block gradient-text mt-2 overflow-hidden">
-              Varshith Julakanti
-            </span>
-          </h1>
-
-          {/* Tagline */}
-          <motion.p
-            className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-14 leading-relaxed"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 2.8, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <span className="text-foreground font-medium">AI Engineer</span> specializing in Machine Learning, 
-            Deep Learning, Computer Vision & MLOps. Building scalable AI systems that solve real-world problems.
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            className="flex flex-col sm:flex-row items-center justify-center gap-5"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 3, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <MagneticButton
-              onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
-              className="px-10 py-4 rounded-full bg-primary text-primary-foreground font-medium text-sm transition-all hover:shadow-[0_0_50px_hsl(190_100%_50%/0.4)]"
+      <div className="relative z-10 container-custom">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left side - Text */}
+          <motion.div style={{ x: textX, y: textY }} className="text-left">
+            {/* Greeting */}
+            <motion.p
+              className="text-primary font-medium mb-8 tracking-[0.3em] text-xs uppercase"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 2.2, ease: [0.22, 1, 0.36, 1] }}
             >
-              View My Work
-            </MagneticButton>
-            <MagneticButton
-              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-              className="px-10 py-4 rounded-full border border-border/50 text-foreground font-medium text-sm transition-all hover:border-primary/50 hover:text-primary"
+              Welcome to my portfolio
+            </motion.p>
+
+            {/* Name with GSAP reveal */}
+            <h1 ref={titleRef} className="text-display mb-8 perspective-1000">
+              <span className="hero-line block text-foreground/90 overflow-hidden">
+                Hi, I'm
+              </span>
+              <span className="hero-line block gradient-text mt-2 overflow-hidden">
+                Varshith Julakanti
+              </span>
+            </h1>
+
+            {/* Tagline */}
+            <motion.p
+              className="text-xl md:text-2xl text-muted-foreground max-w-2xl mb-14 leading-relaxed"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 2.8, ease: [0.22, 1, 0.36, 1] }}
             >
-              Get In Touch
-            </MagneticButton>
+              <span className="text-foreground font-medium">AI Engineer</span> specializing in Machine Learning, 
+              Deep Learning, Computer Vision & MLOps. Building scalable AI systems that solve real-world problems.
+            </motion.p>
+
+            {/* CTA Buttons */}
+            <motion.div
+              className="flex flex-col sm:flex-row items-start gap-5"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 3, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <MagneticButton
+                onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+                className="px-10 py-4 rounded-full bg-primary text-primary-foreground font-medium text-sm transition-all hover:shadow-[0_0_50px_hsl(190_100%_50%/0.4)]"
+              >
+                View My Work
+              </MagneticButton>
+              <MagneticButton
+                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                className="px-10 py-4 rounded-full border border-border/50 text-foreground font-medium text-sm transition-all hover:border-primary/50 hover:text-primary"
+              >
+                Get In Touch
+              </MagneticButton>
+            </motion.div>
           </motion.div>
-        </motion.div>
+
+          {/* Right side - Terminal */}
+          <div className="hidden lg:flex justify-end">
+            <TerminalWidget />
+          </div>
+        </div>
       </div>
 
       {/* Scroll down button */}

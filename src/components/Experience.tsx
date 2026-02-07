@@ -138,9 +138,9 @@ const Experience = () => {
                 {/* Content */}
                 <div className={`md:w-1/2 pl-10 md:pl-0 ${index % 2 === 0 ? "md:pr-16 md:text-right" : "md:pl-16"}`}>
                   <motion.div
-                    className="glass-card p-8 rounded-2xl group"
-                    whileHover={{ scale: 1.02, borderColor: "hsl(var(--primary) / 0.4)" }}
-                    transition={{ duration: 0.4 }}
+                    className="glass-card p-8 rounded-2xl group hover:shadow-[0_0_30px_hsl(190_100%_50%/0.1)]"
+                    whileHover={{ scale: 1.03, y: -6, borderColor: "hsl(var(--primary) / 0.4)" }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   >
                     {/* Period badge */}
                     <div className={`flex items-center gap-2 mb-6 ${index % 2 === 0 ? "md:justify-end" : ""}`}>
