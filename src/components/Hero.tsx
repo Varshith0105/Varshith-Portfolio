@@ -4,12 +4,14 @@ import { ChevronDown } from "lucide-react";
 import gsap from "gsap";
 import MagneticButton from "./MagneticButton";
 import TerminalWidget from "./TerminalWidget";
+import { useSoundEffects } from "@/hooks/useSoundEffects";
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
+  const { playSound } = useSoundEffects();
 
   // Parallax transforms
   const backgroundX = useTransform(mouseX, [-500, 500], [30, -30]);
@@ -158,13 +160,21 @@ const Hero = () => {
               transition={{ duration: 0.8, delay: 3, ease: [0.22, 1, 0.36, 1] }}
             >
               <MagneticButton
-                onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={() => {
+                  playSound("nav");
+                  document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+                }}
+                onMouseEnter={() => playSound("hover")}
                 className="px-10 py-4 rounded-full bg-primary text-primary-foreground font-medium text-sm transition-all hover:shadow-[0_0_50px_hsl(190_100%_50%/0.4)]"
               >
                 View My Work
               </MagneticButton>
               <MagneticButton
-                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={() => {
+                  playSound("confirm");
+                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                }}
+                onMouseEnter={() => playSound("hover")}
                 className="px-10 py-4 rounded-full border border-border/50 text-foreground font-medium text-sm transition-all hover:border-primary/50 hover:text-primary"
               >
                 Get In Touch

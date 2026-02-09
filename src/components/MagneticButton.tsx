@@ -6,10 +6,11 @@ interface MagneticButtonProps {
   children: ReactNode;
   className?: string;
   onClick?: () => void;
+  onMouseEnter?: () => void;
 }
 
 const MagneticButton = forwardRef<HTMLButtonElement, MagneticButtonProps>(
-  ({ children, className = "", onClick }, ref) => {
+  ({ children, className = "", onClick, onMouseEnter }, ref) => {
     const buttonRef = useRef<HTMLButtonElement>(null);
     const contentRef = useRef<HTMLSpanElement>(null);
 
@@ -58,6 +59,7 @@ const MagneticButton = forwardRef<HTMLButtonElement, MagneticButtonProps>(
         ref={buttonRef}
         className={`magnetic ${className}`}
         onClick={onClick}
+        onMouseEnter={onMouseEnter}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         whileHover={{ scale: 1.02 }}

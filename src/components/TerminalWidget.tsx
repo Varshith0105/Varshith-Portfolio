@@ -41,22 +41,22 @@ const TerminalWidget = () => {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 1, delay: 2.5, ease: [0.22, 1, 0.36, 1] }}
     >
-      <TiltCard className="w-full max-w-lg">
-        <div className="overflow-hidden rounded-2xl border border-primary/30 shadow-[0_0_30px_hsl(var(--primary)/0.1)]">
+      <TiltCard className="w-full max-w-2xl">
+        <div className="overflow-hidden rounded-2xl border border-primary/30 shadow-[0_0_40px_hsl(var(--primary)/0.15),0_0_80px_hsl(var(--primary)/0.05)]">
           {/* Title bar */}
-          <div className="flex items-center justify-between px-5 py-3 bg-muted/60 border-b border-primary/20">
-            <div className="flex gap-2">
-              <span className="w-3 h-3 rounded-full bg-red-500/80" />
-              <span className="w-3 h-3 rounded-full bg-amber-500/80" />
-              <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
+          <div className="flex items-center justify-between px-6 py-4 bg-muted/60 border-b border-primary/20">
+            <div className="flex gap-2.5">
+              <span className="w-3.5 h-3.5 rounded-full bg-red-500/80" />
+              <span className="w-3.5 h-3.5 rounded-full bg-amber-500/80" />
+              <span className="w-3.5 h-3.5 rounded-full bg-emerald-500/80" />
             </div>
-            <span className="text-xs text-primary/80 font-mono tracking-wider">
+            <span className="text-sm text-primary/80 font-mono tracking-wider">
               varshith@portfolio:~
             </span>
           </div>
 
           {/* Terminal body */}
-          <div className="bg-background/95 backdrop-blur-md p-6 font-mono text-sm min-h-[220px] space-y-3">
+          <div className="bg-background/95 backdrop-blur-md p-8 font-mono text-base min-h-[280px] space-y-4">
             {terminalLines.slice(0, visibleLines).map((line, i) => (
               <div key={i} className="flex items-start gap-3">
                 <span className="text-primary/60 select-none">›</span>
