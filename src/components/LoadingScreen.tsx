@@ -95,17 +95,43 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
       <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
 
       <div className="relative flex flex-col items-start max-w-lg w-full px-8">
-        {/* Glowing dot */}
+        {/* PC / Circuit Icon */}
         <motion.div
           className="mb-10 relative"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="w-10 h-10 rounded-full border-2 border-primary flex items-center justify-center">
-            <div className="w-4 h-4 rounded-full bg-primary" />
-          </div>
-          <div className="absolute inset-0 w-10 h-10 rounded-full bg-primary/20 blur-lg" />
+          <motion.div
+            className="relative"
+            animate={{ filter: ["drop-shadow(0 0 8px hsl(var(--primary) / 0.6))", "drop-shadow(0 0 16px hsl(var(--primary) / 0.3))", "drop-shadow(0 0 8px hsl(var(--primary) / 0.6))"] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {/* Monitor */}
+              <rect x="8" y="6" width="32" height="24" rx="3" stroke="hsl(var(--primary))" strokeWidth="2" fill="none" />
+              {/* Screen content - code lines */}
+              <line x1="13" y1="13" x2="25" y2="13" stroke="hsl(var(--primary))" strokeWidth="1.5" strokeLinecap="round" opacity="0.7" />
+              <line x1="13" y1="18" x2="20" y2="18" stroke="hsl(var(--primary))" strokeWidth="1.5" strokeLinecap="round" opacity="0.5" />
+              <line x1="22" y1="18" x2="30" y2="18" stroke="hsl(var(--primary))" strokeWidth="1.5" strokeLinecap="round" opacity="0.5" />
+              <line x1="13" y1="23" x2="18" y2="23" stroke="hsl(var(--primary))" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
+              {/* Cursor blink */}
+              <rect x="20" y="22" width="2" height="3" fill="hsl(var(--primary))" opacity="0.8">
+                <animate attributeName="opacity" values="0.8;0;0.8" dur="1s" repeatCount="indefinite" />
+              </rect>
+              {/* Stand */}
+              <line x1="20" y1="30" x2="28" y2="30" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round" />
+              <line x1="24" y1="30" x2="24" y2="35" stroke="hsl(var(--primary))" strokeWidth="2" />
+              <line x1="18" y1="35" x2="30" y2="35" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round" />
+              {/* Neural network dots */}
+              <circle cx="36" cy="10" r="1.5" fill="hsl(var(--primary))" opacity="0.6" />
+              <circle cx="40" cy="14" r="1" fill="hsl(var(--primary))" opacity="0.4" />
+              <circle cx="38" cy="18" r="1.5" fill="hsl(var(--primary))" opacity="0.5" />
+              <line x1="36" y1="10" x2="40" y2="14" stroke="hsl(var(--primary))" strokeWidth="0.5" opacity="0.3" />
+              <line x1="40" y1="14" x2="38" y2="18" stroke="hsl(var(--primary))" strokeWidth="0.5" opacity="0.3" />
+            </svg>
+          </motion.div>
+          <div className="absolute inset-0 bg-primary/15 blur-xl rounded-full" />
         </motion.div>
 
         {/* Name */}
