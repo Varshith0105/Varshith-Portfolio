@@ -4,8 +4,8 @@ import TiltCard from "./TiltCard";
 
 const terminalLines = [
   { text: "Initializing system...", delay: 300 },
-  { text: "Loading portfolio data...", delay: 600 },
-  { text: "Welcome to my digital space!", delay: 500 },
+  { text: "Loading portfolio data...", delay: 500 },
+  { text: "Welcome to my digital space!", delay: 400 },
   { text: "Status: ONLINE", delay: 400, highlight: true },
   { text: "Ready to create amazing things.", delay: 500 },
 ];
@@ -42,32 +42,32 @@ const TerminalWidget = () => {
       transition={{ duration: 1, delay: 2.5, ease: [0.22, 1, 0.36, 1] }}
     >
       <TiltCard className="w-full max-w-lg">
-        <div className="overflow-hidden rounded-2xl">
+        <div className="overflow-hidden rounded-2xl border border-primary/30 shadow-[0_0_30px_hsl(var(--primary)/0.1)]">
           {/* Title bar */}
-          <div className="flex items-center justify-between px-4 py-3 bg-muted/80 border-b border-border/50">
+          <div className="flex items-center justify-between px-5 py-3 bg-muted/60 border-b border-primary/20">
             <div className="flex gap-2">
               <span className="w-3 h-3 rounded-full bg-red-500/80" />
               <span className="w-3 h-3 rounded-full bg-amber-500/80" />
               <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
             </div>
-            <span className="text-xs text-primary font-mono tracking-wider">
+            <span className="text-xs text-primary/80 font-mono tracking-wider">
               varshith@portfolio:~
             </span>
           </div>
 
           {/* Terminal body */}
-          <div className="bg-background/90 backdrop-blur-md p-6 font-mono text-sm min-h-[200px] space-y-3">
+          <div className="bg-background/95 backdrop-blur-md p-6 font-mono text-sm min-h-[220px] space-y-3">
             {terminalLines.slice(0, visibleLines).map((line, i) => (
-              <div key={i} className="flex items-start gap-2">
-                <span className="text-primary/70 select-none">›</span>
+              <div key={i} className="flex items-start gap-3">
+                <span className="text-primary/60 select-none">›</span>
                 <span className={line.highlight ? "text-primary font-semibold" : "text-foreground/80"}>
                   {line.text}
                 </span>
               </div>
             ))}
             {visibleLines < terminalLines.length && (
-              <div className="flex items-start gap-2">
-                <span className="text-primary/70 select-none">›</span>
+              <div className="flex items-start gap-3">
+                <span className="text-primary/60 select-none">›</span>
                 <span className="text-foreground/80">
                   {currentText}
                   <motion.span
@@ -79,8 +79,8 @@ const TerminalWidget = () => {
               </div>
             )}
             {visibleLines >= terminalLines.length && (
-              <div className="flex items-start gap-2">
-                <span className="text-primary/70 select-none">›</span>
+              <div className="flex items-start gap-3">
+                <span className="text-primary/60 select-none">›</span>
                 <motion.span
                   className="inline-block w-2 h-4 bg-primary align-middle"
                   animate={{ opacity: [1, 0] }}
