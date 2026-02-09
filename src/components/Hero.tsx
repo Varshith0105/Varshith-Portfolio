@@ -109,33 +109,45 @@ const Hero = () => {
           <motion.div style={{ x: textX, y: textY }} className="text-left">
             {/* Greeting */}
             <motion.p
-              className="text-primary font-medium mb-8 tracking-[0.3em] text-xs uppercase"
+              className="text-primary font-medium mb-6 tracking-[0.3em] text-xs uppercase"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 2.2, ease: [0.22, 1, 0.36, 1] }}
             >
-              Welcome to my portfolio
+              AI Engineer
             </motion.p>
 
             {/* Name with GSAP reveal */}
-            <h1 ref={titleRef} className="text-display mb-8 perspective-1000">
-              <span className="hero-line block text-foreground/90 overflow-hidden">
-                Hi, I'm
+            <h1 ref={titleRef} className="text-display mb-6 perspective-1000">
+              <span className="hero-line block text-foreground/90 overflow-hidden text-4xl md:text-5xl lg:text-6xl font-bold">
+                HI, I'M
               </span>
-              <span className="hero-line block gradient-text mt-2 overflow-hidden">
-                Varshith Julakanti
+              <span className="hero-line block gradient-text mt-1 overflow-hidden text-5xl md:text-6xl lg:text-7xl font-black uppercase">
+                Varshith
+              </span>
+              <span className="hero-line block gradient-text overflow-hidden text-5xl md:text-6xl lg:text-7xl font-black uppercase">
+                Julakanti
               </span>
             </h1>
 
+            {/* Subtitle */}
+            <motion.p
+              className="text-primary font-medium text-sm tracking-[0.2em] uppercase mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 2.6, ease: [0.22, 1, 0.36, 1] }}
+            >
+              Machine Learning & Deep Learning Enthusiast
+            </motion.p>
+
             {/* Tagline */}
             <motion.p
-              className="text-xl md:text-2xl text-muted-foreground max-w-2xl mb-14 leading-relaxed"
+              className="text-lg md:text-xl text-muted-foreground max-w-xl mb-12 leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 2.8, ease: [0.22, 1, 0.36, 1] }}
             >
-              <span className="text-foreground font-medium">AI Engineer</span> specializing in Machine Learning, 
-              Deep Learning, Computer Vision & MLOps. Building scalable AI systems that solve real-world problems.
+              A passionate AI enthusiast specializing in machine learning, deep learning, and building intelligent solutions that solve real-world problems.
             </motion.p>
 
             {/* CTA Buttons */}
