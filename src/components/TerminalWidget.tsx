@@ -41,8 +41,10 @@ const TerminalWidget = () => {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 1, delay: 2.5, ease: [0.22, 1, 0.36, 1] }}
     >
-      <TiltCard className="w-full max-w-xl xl:max-w-2xl">
+      {/* WIDTH UPDATED HERE ONLY */}
+      <TiltCard className="w-full max-w-2xl xl:max-w-3xl 2xl:max-w-4xl">
         <div className="overflow-hidden rounded-2xl border border-primary/30 shadow-[0_0_40px_hsl(var(--primary)/0.15),0_0_80px_hsl(var(--primary)/0.05)]">
+          
           {/* Title bar */}
           <div className="flex items-center justify-between px-6 py-4 bg-muted/60 border-b border-primary/20">
             <div className="flex gap-2.5">
@@ -60,11 +62,18 @@ const TerminalWidget = () => {
             {terminalLines.slice(0, visibleLines).map((line, i) => (
               <div key={i} className="flex items-start gap-3">
                 <span className="text-primary/60 select-none">›</span>
-                <span className={line.highlight ? "text-primary font-semibold" : "text-foreground/80"}>
+                <span
+                  className={
+                    line.highlight
+                      ? "text-primary font-semibold"
+                      : "text-foreground/80"
+                  }
+                >
                   {line.text}
                 </span>
               </div>
             ))}
+
             {visibleLines < terminalLines.length && (
               <div className="flex items-start gap-3">
                 <span className="text-primary/60 select-none">›</span>
@@ -78,6 +87,7 @@ const TerminalWidget = () => {
                 </span>
               </div>
             )}
+
             {visibleLines >= terminalLines.length && (
               <div className="flex items-start gap-3">
                 <span className="text-primary/60 select-none">›</span>
