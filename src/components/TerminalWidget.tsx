@@ -41,7 +41,7 @@ const TerminalWidget = () => {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 1, delay: 2.5, ease: [0.22, 1, 0.36, 1] }}
     >
-      <TiltCard className="w-full max-w-2xl">
+      <TiltCard className="w-full max-w-xl xl:max-w-2xl">
         <div className="overflow-hidden rounded-2xl border border-primary/30 shadow-[0_0_40px_hsl(var(--primary)/0.15),0_0_80px_hsl(var(--primary)/0.05)]">
           {/* Title bar */}
           <div className="flex items-center justify-between px-6 py-4 bg-muted/60 border-b border-primary/20">

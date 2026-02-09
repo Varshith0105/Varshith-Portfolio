@@ -183,7 +183,7 @@ const Hero = () => {
           </motion.div>
 
           {/* Right side - Terminal */}
-          <div className="hidden lg:flex justify-end">
+          <div className="hidden lg:flex justify-end items-center">
             <TerminalWidget />
           </div>
         </div>

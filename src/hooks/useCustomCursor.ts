@@ -39,9 +39,9 @@ export const useCustomCursor = () => {
     const state = stateRef.current;
 
     // Smoother lerp - higher values = faster following
-    const dotLerp = 0.35;
-    const ringLerp = 0.18;
-    const trailLerp = 0.12;
+    const dotLerp = 0.4;
+    const ringLerp = 0.15;
+    const trailLerp = 0.1;
 
     // Update dot position
     dotPos.current.x += (state.x - dotPos.current.x) * dotLerp;
@@ -113,11 +113,11 @@ export const useCustomCursor = () => {
     if (ring && dot) {
       if (cursorType === "link" || cursorType === "button") {
         gsap.to(ring, {
-          width: 60,
-          height: 60,
-          borderWidth: 2,
+          width: 50,
+          height: 50,
+          borderWidth: 1.5,
           borderColor: "hsl(190, 100%, 60%)",
-          opacity: 0.9,
+          opacity: 0.8,
           duration: 0.3,
           ease: "power2.out",
         });
@@ -129,8 +129,8 @@ export const useCustomCursor = () => {
         });
       } else if (cursorType === "card") {
         gsap.to(ring, {
-          width: 80,
-          height: 80,
+          width: 70,
+          height: 70,
           borderWidth: 1,
           borderColor: "hsl(190, 100%, 50%)",
           opacity: 0.4,
@@ -156,11 +156,11 @@ export const useCustomCursor = () => {
 
     if (ring && dot) {
       gsap.to(ring, {
-        width: 40,
-        height: 40,
-        borderWidth: 1.5,
+        width: 36,
+        height: 36,
+        borderWidth: 1,
         borderColor: "hsl(190, 100%, 50%)",
-        opacity: 0.8,
+        opacity: 0.6,
         duration: 0.4,
         ease: "elastic.out(1, 0.5)",
       });
@@ -218,14 +218,15 @@ export const useCustomCursor = () => {
       position: fixed;
       top: 0;
       left: 0;
-      width: 8px;
-      height: 8px;
+      width: 6px;
+      height: 6px;
       background: hsl(190, 100%, 50%);
       border-radius: 50%;
       pointer-events: none;
       z-index: 99999;
       will-change: transform;
-      box-shadow: 0 0 20px hsl(190, 100%, 50%), 0 0 40px hsl(190, 100%, 50% / 0.5);
+      box-shadow: 0 0 12px hsl(190, 100%, 50%), 0 0 30px hsl(190, 100%, 50% / 0.4);
+      mix-blend-mode: screen;
     `;
     document.body.appendChild(dot);
     cursorDotRef.current = dot;
@@ -237,14 +238,15 @@ export const useCustomCursor = () => {
       position: fixed;
       top: 0;
       left: 0;
-      width: 40px;
-      height: 40px;
-      border: 1.5px solid hsl(190, 100%, 50%);
+      width: 36px;
+      height: 36px;
+      border: 1px solid hsl(190, 100%, 50%);
       border-radius: 50%;
       pointer-events: none;
       z-index: 99998;
       will-change: transform;
-      opacity: 0.8;
+      opacity: 0.6;
+      transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
     `;
     document.body.appendChild(ring);
     cursorRingRef.current = ring;
@@ -257,14 +259,15 @@ export const useCustomCursor = () => {
         position: fixed;
         top: 0;
         left: 0;
-        width: ${6 - i}px;
-        height: ${6 - i}px;
-        background: hsl(190, 100%, ${60 - i * 5}%);
+        width: ${4 - i * 0.5}px;
+        height: ${4 - i * 0.5}px;
+        background: hsl(190, 100%, ${55 - i * 5}%);
         border-radius: 50%;
         pointer-events: none;
         z-index: ${99997 - i};
         will-change: transform;
-        opacity: ${0.5 - i * 0.1};
+        opacity: ${0.4 - i * 0.08};
+        mix-blend-mode: screen;
       `;
       document.body.appendChild(trail);
       cursorTrailRef.current.push(trail);

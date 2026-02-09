@@ -1,5 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { useSoundEffects } from "@/hooks/useSoundEffects";
 import { Award, ExternalLink, Download, Cloud, Brain, Code, Database } from "lucide-react";
 
 const certificates = [
@@ -62,6 +63,7 @@ const certificates = [
 const Certificates = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { playSound } = useSoundEffects();
 
   return (
     <section id="certificates" className="section-padding relative overflow-hidden" ref={ref}>
@@ -99,6 +101,7 @@ const Certificates = () => {
               animate={isInView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
               transition={{ delay: index * 0.1, duration: 0.6 }}
               whileHover={{ scale: 1.04, y: -8 }}
+              onHoverStart={() => playSound("hover")}
             >
               <div className="glass-card rounded-2xl p-6 h-full transition-all duration-500 hover:border-primary/40 hover:shadow-[0_0_30px_hsl(190_100%_50%/0.1)]">
                 {/* Gradient header */}
@@ -120,6 +123,7 @@ const Certificates = () => {
                   <motion.a
                     href={cert.pdf}
                     download
+                    onClick={() => playSound("nav")}
                     className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg bg-primary/10 text-primary text-sm font-medium hover:bg-primary/20 transition-colors"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -131,6 +135,7 @@ const Certificates = () => {
                     href={cert.driveLink}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => playSound("confirm")}
                     className="flex items-center justify-center w-10 h-10 rounded-lg border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/40 transition-all"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
