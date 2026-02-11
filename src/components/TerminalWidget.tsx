@@ -42,7 +42,7 @@ const TerminalWidget = () => {
       transition={{ duration: 1, delay: 2.5, ease: [0.22, 1, 0.36, 1] }}
     >
       {/* WIDTH UPDATED HERE ONLY */}
-      <TiltCard className="w-full max-w-2xl xl:max-w-3xl 2xl:max-w-4xl">
+      <TiltCard className="w-full max-w-3xl xl:max-w-4xl 2xl:max-w-5xl">
         <div className="overflow-hidden rounded-2xl border border-primary/30 shadow-[0_0_40px_hsl(var(--primary)/0.15),0_0_80px_hsl(var(--primary)/0.05)]">
           
           {/* Title bar */}

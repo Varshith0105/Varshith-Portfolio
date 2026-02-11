@@ -106,7 +106,7 @@ const Hero = () => {
 
       {/* Content */}
       <div className="relative z-10 container-custom">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-[1fr_1.3fr] gap-8 items-center">
           {/* Left side - Text */}
           <motion.div style={{ x: textX, y: textY }} className="text-left">
             {/* Greeting */}
@@ -183,7 +183,7 @@ const Hero = () => {
           </motion.div>
 
           {/* Right side - Terminal */}
-          <div className="hidden lg:flex justify-end items-center">
+          <div className="hidden lg:flex justify-end items-center lg:col-span-1">
             <TerminalWidget />
           </div>
         </div>

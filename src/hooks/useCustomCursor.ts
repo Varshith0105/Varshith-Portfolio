@@ -111,36 +111,57 @@ export const useCustomCursor = () => {
     const dot = cursorDotRef.current;
 
     if (ring && dot) {
-      if (cursorType === "link" || cursorType === "button") {
+      if (cursorType === "link") {
         gsap.to(ring, {
-          width: 50,
-          height: 50,
-          borderWidth: 1.5,
-          borderColor: "hsl(190, 100%, 60%)",
-          opacity: 0.8,
+          width: 48,
+          height: 48,
+          borderWidth: 2,
+          borderColor: "hsl(200, 100%, 65%)",
+          opacity: 0.9,
           duration: 0.3,
           ease: "power2.out",
         });
         gsap.to(dot, {
-          scale: 0.5,
-          backgroundColor: "hsl(190, 100%, 60%)",
+          scale: 0.4,
+          backgroundColor: "hsl(200, 100%, 65%)",
+          boxShadow: "0 0 16px hsl(200, 100%, 65%), 0 0 40px hsl(200, 100%, 65% / 0.4)",
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      } else if (cursorType === "button") {
+        gsap.to(ring, {
+          width: 56,
+          height: 56,
+          borderWidth: 2,
+          borderColor: "hsl(170, 100%, 55%)",
+          opacity: 0.85,
+          boxShadow: "0 0 20px hsl(170, 100%, 55% / 0.3)",
+          duration: 0.3,
+          ease: "power2.out",
+        });
+        gsap.to(dot, {
+          scale: 0.3,
+          backgroundColor: "hsl(170, 100%, 55%)",
+          boxShadow: "0 0 14px hsl(170, 100%, 55%), 0 0 35px hsl(170, 100%, 55% / 0.5)",
           duration: 0.3,
           ease: "power2.out",
         });
       } else if (cursorType === "card") {
         gsap.to(ring, {
-          width: 70,
-          height: 70,
-          borderWidth: 1,
-          borderColor: "hsl(190, 100%, 50%)",
-          opacity: 0.4,
-          duration: 0.3,
+          width: 72,
+          height: 72,
+          borderWidth: 1.5,
+          borderColor: "hsl(220, 100%, 65%)",
+          opacity: 0.5,
+          boxShadow: "0 0 25px hsl(220, 100%, 65% / 0.2)",
+          duration: 0.35,
           ease: "power2.out",
         });
         gsap.to(dot, {
-          scale: 1.5,
-          backgroundColor: "hsl(190, 100%, 50%)",
-          duration: 0.3,
+          scale: 1.8,
+          backgroundColor: "hsl(220, 100%, 65%)",
+          boxShadow: "0 0 20px hsl(220, 100%, 65%), 0 0 50px hsl(220, 100%, 65% / 0.4)",
+          duration: 0.35,
           ease: "power2.out",
         });
       }
@@ -161,12 +182,14 @@ export const useCustomCursor = () => {
         borderWidth: 1,
         borderColor: "hsl(190, 100%, 50%)",
         opacity: 0.6,
+        boxShadow: "none",
         duration: 0.4,
         ease: "elastic.out(1, 0.5)",
       });
       gsap.to(dot, {
         scale: 1,
         backgroundColor: "hsl(190, 100%, 50%)",
+        boxShadow: "0 0 12px hsl(190, 100%, 50%), 0 0 30px hsl(190, 100%, 50% / 0.4)",
         duration: 0.4,
         ease: "elastic.out(1, 0.5)",
       });
@@ -299,7 +322,7 @@ export const useCustomCursor = () => {
       });
 
       // Cards
-      document.querySelectorAll(".project-card, .skill-card, .glass-card").forEach((el) => {
+      document.querySelectorAll(".project-card, .skill-card, .glass-card, .cert-card").forEach((el) => {
         el.addEventListener("mouseenter", () => handleMouseEnter("card"));
         el.addEventListener("mouseleave", handleMouseLeave);
         (el as HTMLElement).style.cursor = "none";
