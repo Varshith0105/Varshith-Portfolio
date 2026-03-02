@@ -11,17 +11,16 @@ import Certificates from "@/components/Certificates";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
+import { useCustomCursor } from "@/hooks/useCustomCursor";
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
+  useCustomCursor();
 
   return (
     <SmoothScrollProvider>
       <div className="relative">
-        {/* Animated grain overlay */}
         <div className="grain-overlay" />
-        
-        {/* Vignette effect */}
         <div className="vignette-overlay" />
 
         <AnimatePresence mode="wait">

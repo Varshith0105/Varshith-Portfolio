@@ -199,6 +199,22 @@
     transform: translate(-50%, -50%);
     z-index: 0;
   }
+
+  /* Terminal breathing glow */
+  @keyframes terminal-breathe {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(190 100% 50% / 0.1), 0 0 40px hsl(190 100% 50% / 0.05);
+      border-color: hsl(190 100% 50% / 0.2);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(190 100% 50% / 0.25), 0 0 80px hsl(190 100% 50% / 0.1), 0 0 120px hsl(190 100% 50% / 0.05);
+      border-color: hsl(190 100% 50% / 0.45);
+    }
+  }
+
+  .terminal-breathing {
+    animation: terminal-breathe 4s ease-in-out infinite;
+  }
 }
 
 @layer utilities {

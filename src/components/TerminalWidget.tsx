@@ -43,7 +43,7 @@ const TerminalWidget = () => {
     >
       {/* WIDTH UPDATED HERE ONLY */}
       <TiltCard className="w-full max-w-3xl xl:max-w-4xl 2xl:max-w-5xl">
-        <div className="overflow-hidden rounded-2xl border border-primary/30 shadow-[0_0_40px_hsl(var(--primary)/0.15),0_0_80px_hsl(var(--primary)/0.05)]">
+        <div className="overflow-hidden rounded-2xl border border-primary/30 terminal-breathing">
           
           {/* Title bar */}
           <div className="flex items-center justify-between px-6 py-4 bg-muted/60 border-b border-primary/20">
