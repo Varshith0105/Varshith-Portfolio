@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import MagneticButton from "./MagneticButton";
+import { useSoundEffects } from "@/hooks/useSoundEffects";
 
 const navItems = [
   { label: "About", href: "#about" },
@@ -16,12 +17,11 @@ const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { playSound } = useSoundEffects();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-
-      // Update active section based on scroll position
       const sections = navItems.map((item) => item.href.slice(1));
       for (const section of sections.reverse()) {
         const element = document.getElementById(section);
@@ -34,16 +34,14 @@ const Navigation = () => {
         }
       }
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToSection = (href: string) => {
+    playSound("nav");
     const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+    if (element) element.scrollIntoView({ behavior: "smooth" });
     setIsMobileMenuOpen(false);
   };
 
@@ -58,25 +56,25 @@ const Navigation = () => {
         transition={{ duration: 0.8, delay: 2.2, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className="container-custom flex items-center justify-between h-20">
-          {/* Logo */}
           <motion.a
             href="#"
             className="font-display text-xl font-bold tracking-tight relative z-50"
             whileHover={{ scale: 1.05 }}
             onClick={(e) => {
               e.preventDefault();
+              playSound("nav");
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
           >
             <span className="gradient-text">VJ</span>
           </motion.a>
 
-          {/* Nav Links - Desktop */}
           <div className="hidden md:flex items-center gap-10">
             {navItems.map((item, index) => (
               <motion.button
                 key={item.label}
                 onClick={() => scrollToSection(item.href)}
+                onMouseEnter={() => playSound("hover")}
                 className={`relative text-sm tracking-wide transition-colors ${
                   activeSection === item.href.slice(1)
                     ? "text-primary"
@@ -99,7 +97,6 @@ const Navigation = () => {
             ))}
           </div>
 
-          {/* Contact Button - Desktop */}
           <motion.div
             className="hidden md:block"
             initial={{ opacity: 0 }}
@@ -108,30 +105,28 @@ const Navigation = () => {
           >
             <MagneticButton
               onClick={() => scrollToSection("#contact")}
+              onMouseEnter={() => playSound("hover")}
               className="px-6 py-2.5 rounded-full border border-primary/40 text-primary text-sm font-medium transition-all hover:bg-primary hover:text-primary-foreground"
             >
               Let's Talk
             </MagneticButton>
           </motion.div>
 
-          {/* Mobile Menu Button */}
           <motion.button
             className="md:hidden flex items-center justify-center w-10 h-10 relative z-50"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={() => {
+              playSound("nav");
+              setIsMobileMenuOpen(!isMobileMenuOpen);
+            }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 2.4 }}
           >
-            {isMobileMenuOpen ? (
-              <X size={24} className="text-foreground" />
-            ) : (
-              <Menu size={24} className="text-foreground" />
-            )}
+            {isMobileMenuOpen ? <X size={24} className="text-foreground" /> : <Menu size={24} className="text-foreground" />}
           </motion.button>
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
