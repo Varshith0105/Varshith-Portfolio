@@ -31,7 +31,7 @@ const projects = [
   liveUrl: "https://your-personal-ai-chat.vercel.app/",
   github: "https://github.com/your-username/your-repo",
   image: chatbotImg,
-}
+  },
   {
     title: "StockAI - Price Prediction",
     description: "AI-based stock price forecasting web app using real-time market data. Implements Linear Regression with interactive dashboards for actual vs predicted prices.",
