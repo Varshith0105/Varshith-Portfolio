@@ -8,6 +8,7 @@ import { useSoundEffects } from "@/hooks/useSoundEffects";
 import drugDiscoveryImg from "@/assets/project-drug-discovery.jpg";
 import skinDetectionImg from "@/assets/project-skin-detection.jpg";
 import stockAiImg from "@/assets/project-stock-ai.jpg";
+import chatbotImg from "@/assets/project-chatbot.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 
